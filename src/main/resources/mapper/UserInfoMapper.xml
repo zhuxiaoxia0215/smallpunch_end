@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miniprogram.mapper.UserInfoMapper">
+
+    <resultMap type="com.miniprogram.entity.UserInfo" id="UserInfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="openId" column="open_id" jdbcType="VARCHAR"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="INTEGER"/>
+        <result property="birthday" column="birthday" jdbcType="TIMESTAMP"/>
+        <result property="bgImgId" column="bg_img_id" jdbcType="INTEGER"/>
+        <result property="personSign" column="person_sign" jdbcType="VARCHAR"/>
+        <result property="weixinNum" column="weixin_Num" jdbcType="VARCHAR"/>
+        <result property="avatarUrl" column="avatar_url" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        open_id,
+        nick_name,
+        sex,
+        birthday,
+        bg_img_id,
+        person_sign,
+        weixin_Num,
+        avatar_url
+    </sql>
+
+    <select id="selectByOpenId" resultMap="UserInfoMap">
+        select <include refid="Base_Column_List"/>
+        from user_info
+        where open_id=#{openId}
+    </select>
+
+    <insert id="insert" >
+        insert into smallpunch.user_info(open_id, nick_name, sex, birthday, bg_img_id, person_sign, weixin_Num, avatar_url)
+        values (#{openId}, #{nickName},#{sex}, null,1,null,null,#{avatarUrl})
+    </insert>
+</mapper>
