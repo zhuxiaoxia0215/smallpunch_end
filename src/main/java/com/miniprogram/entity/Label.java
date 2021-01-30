@@ -3,13 +3,13 @@ package com.miniprogram.entity;
 import java.io.Serializable;
 
 /**
- * (Lable)实体类
+ * (Label)实体类
  *
  * @author zhuxiaoxia
- * @since 2021-01-29 10:13:28
+ * @since 2021-01-31 00:16:10
  */
-public class Lable implements Serializable {
-    private static final long serialVersionUID = -35110193467571226L;
+public class Label implements Serializable {
+    private static final long serialVersionUID = 796998679966254148L;
 
     private Integer id;
     /**
@@ -19,7 +19,7 @@ public class Lable implements Serializable {
     /**
      * 标签名称
      */
-    private String lableName;
+    private String labelName;
 
 
     public Integer getId() {
@@ -38,12 +38,12 @@ public class Lable implements Serializable {
         this.parentId = parentId;
     }
 
-    public String getLableName() {
-        return lableName;
+    public String getLabelName() {
+        return labelName;
     }
 
-    public void setLableName(String lableName) {
-        this.lableName = lableName;
+    public void setLabelName(String labelName) {
+        this.labelName = labelName;
     }
 
 }

@@ -6,6 +6,7 @@
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="projectId" column="project_id" jdbcType="INTEGER"/>
         <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="isCreator" column="is_creator" jdbcType="INTEGER"/>
         <result property="attendTime" column="attend_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
@@ -13,7 +14,8 @@
         id,
         project_id,
         user_id,
-        attend_time
+        is_creator,
+        attend_time,
     </sql>
 
 

@@ -36,4 +36,10 @@
         insert into smallpunch.user_info(open_id, nick_name, sex, birthday, bg_img_id, person_sign, weixin_Num, avatar_url)
         values (#{openId}, #{nickName},#{sex}, null,1,null,null,#{avatarUrl})
     </insert>
+
+    <select id="selectById" resultType="java.util.HashMap">
+        select id, nick_name, sex
+        from user_info
+        where user_info.id=#{userId}
+    </select>
 </mapper>

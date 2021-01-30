@@ -2,33 +2,35 @@ package com.miniprogram.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.miniprogram.bean.OutputObject;
+import com.miniprogram.entity.Project;
 import com.miniprogram.entity.UserInfo;
 import com.miniprogram.entity.OpenIdJson;
+import com.miniprogram.service.ProjectService;
 import com.miniprogram.service.UserInfoService;
 import com.miniprogram.utils.HttpUtil;
 import com.miniprogram.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/index/user")
+@RequestMapping("/index")
 public class UserController {
 
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private ProjectService projectService;
 
  /**
    * 根据code换取openid和session_key
    */
-    @GetMapping("getOpenId")
+    @GetMapping("/user/getOpenId")
     public String getOpenId(HttpServletRequest request, @RequestParam("code") String code) throws IOException {
         String appID = "wxf2f99291359f6aa8";
         String appSecret = "ec8966fbefb0b13ed7f4ed32672c99c0";
@@ -58,7 +60,7 @@ public class UserController {
      *@return: java.util.Map
      *@Author: zhuxiaoxia
      */
-    @GetMapping("/addUserInfo")
+    @GetMapping("/user/addUserInfo")
     public Map addUserInfo(HttpServletRequest request, @RequestParam("open_id") String openId,
                                     @RequestParam("nick_name") String nickName, @RequestParam("avatar_url") String avatarUrl,
                                     @RequestParam("sex") String sex){
@@ -66,6 +68,17 @@ public class UserController {
         Map map=new HashMap<String, Object>();
         map.put("userInfo", userInfo);
         return map;
+    }
+
+    @RequestMapping(value = "/User/getAllProject")
+    public Map getAllproject(HttpServletRequest request,@RequestBody Map<String, Object> json){
+        Integer userId = (Integer) json.get("userId");
+        Map outerMap =new HashMap();
+        Map map = userInfoService.selectById(userId);
+        map.put("punchCardProjectList",projectService.selectByUserId(userId));
+        outerMap.put("data",map);
+        outerMap.put("sucMsg","获取我的打卡圈子列表成功!");
+        return outerMap;
     }
 
 

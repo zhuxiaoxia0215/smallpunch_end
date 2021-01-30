@@ -1,7 +1,8 @@
 package com.miniprogram.service;
 
 import com.miniprogram.entity.UserInfo;
-import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 
 /**
@@ -15,4 +16,5 @@ public interface UserInfoService {
 
     UserInfo addUserInfo(String openId,String nickName,String avatarUrl,String sex);
 
+    Map selectById(Integer userId);
 }

@@ -13,7 +13,7 @@
         id,
         visted_id,
         vistor_id,
-        creat_time,
+        creat_time
     </sql>
 
 

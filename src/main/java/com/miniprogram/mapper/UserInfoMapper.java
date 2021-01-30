@@ -3,6 +3,8 @@ package com.miniprogram.mapper;
 import com.miniprogram.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Map;
+
 /**
  * (UserInfo)表数据库访问层
  *
@@ -17,4 +19,5 @@ public interface UserInfoMapper {
 
     int insert (String openId,String nickName,String avatarUrl,String sex);
 
+    Map selectById(Integer userId);
 }

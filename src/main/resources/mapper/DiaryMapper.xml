@@ -27,7 +27,7 @@
         punch_card_time,
         text_content,
         visible_type,
-        is_repair_diary,
+        is_repair_diary
     </sql>
 
 

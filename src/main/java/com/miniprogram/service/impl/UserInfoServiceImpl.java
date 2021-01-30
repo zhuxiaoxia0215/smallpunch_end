@@ -6,6 +6,8 @@ import com.miniprogram.service.UserInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * (UserInfo)表服务实现类
@@ -27,6 +29,11 @@ public class UserInfoServiceImpl implements UserInfoService {
             userInfo = userInfoMapper.selectByOpenId(openId);
         }
         return userInfo;
+    }
+
+    @Override
+    public Map selectById(Integer userId) {
+        return userInfoMapper.selectById(userId);
     }
 
 

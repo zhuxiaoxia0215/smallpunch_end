@@ -7,10 +7,10 @@ import java.util.Date;
  * (AttendUser)实体类
  *
  * @author zhuxiaoxia
- * @since 2021-01-29 09:56:36
+ * @since 2021-01-30 18:11:44
  */
 public class AttendUser implements Serializable {
-    private static final long serialVersionUID = -55317846998815533L;
+    private static final long serialVersionUID = -54908265346271277L;
 
     private Integer id;
     /**
@@ -21,6 +21,10 @@ public class AttendUser implements Serializable {
      * 用户id
      */
     private Integer userId;
+    /**
+     * 是否为圈主 1.是 0.否
+     */
+    private Integer isCreator;
     /**
      * 加入时间
      */
@@ -49,6 +53,14 @@ public class AttendUser implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getIsCreator() {
+        return isCreator;
+    }
+
+    public void setIsCreator(Integer isCreator) {
+        this.isCreator = isCreator;
     }
 
     public Date getAttendTime() {

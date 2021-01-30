@@ -13,7 +13,7 @@
         id,
         diary_id,
         resource_url,
-        type,
+        type
     </sql>
 
 

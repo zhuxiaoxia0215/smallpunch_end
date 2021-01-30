@@ -13,7 +13,7 @@
         id,
         diary_id,
         admirer_id,
-        is_read,
+        is_read
     </sql>
 
 

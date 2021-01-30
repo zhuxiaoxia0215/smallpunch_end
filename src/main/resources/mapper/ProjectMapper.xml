@@ -15,8 +15,13 @@
         project_name,
         cover_img_url,
         creator_id,
-        creator_introduce,
+        creator_introduce
     </sql>
+    <select id="selectByUserId" resultType="java.util.HashMap">
+        select project.id,project_name,cover_img_url,creator_id,is_creator
+        from project,attend_user
+        where project.id =attend_user.project_id and user_id= #{userId}
+    </select>
 
 
 </mapper>
