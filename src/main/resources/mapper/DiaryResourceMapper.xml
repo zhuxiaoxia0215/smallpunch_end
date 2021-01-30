@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miniprogram.mapper.DiaryResourceMapper">
+
+    <resultMap type="com.miniprogram.entity.DiaryResource" id="DiaryResourceMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="diaryId" column="diary_id" jdbcType="INTEGER"/>
+        <result property="resourceUrl" column="resource_url" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        diary_id,
+        resource_url,
+        type,
+    </sql>
+
+
+</mapper>

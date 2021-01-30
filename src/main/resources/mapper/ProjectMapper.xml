@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miniprogram.mapper.ProjectMapper">
+
+    <resultMap type="com.miniprogram.entity.Project" id="ProjectMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="projectName" column="project_name" jdbcType="VARCHAR"/>
+        <result property="coverImgUrl" column="cover_img_url" jdbcType="VARCHAR"/>
+        <result property="creatorId" column="creator_id" jdbcType="INTEGER"/>
+        <result property="creatorIntroduce" column="creator_introduce" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        project_name,
+        cover_img_url,
+        creator_id,
+        creator_introduce,
+    </sql>
+
+
+</mapper>

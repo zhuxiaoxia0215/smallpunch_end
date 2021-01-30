@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miniprogram.mapper.DiaryMapper">
+
+    <resultMap type="com.miniprogram.entity.Diary" id="DiaryMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="projectId" column="project_id" jdbcType="INTEGER"/>
+        <result property="publisherId" column="publisher_id" jdbcType="INTEGER"/>
+        <result property="addressLatitude" column="address_latitude" jdbcType="OTHER"/>
+        <result property="addressLongitude" column="address_longitude" jdbcType="OTHER"/>
+        <result property="currDiaryPunchCardDayNum" column="curr_diary_punch_card_day_num" jdbcType="INTEGER"/>
+        <result property="punchCardAddress" column="punch_card_address" jdbcType="VARCHAR"/>
+        <result property="punchCardTime" column="punch_card_time" jdbcType="TIMESTAMP"/>
+        <result property="textContent" column="text_content" jdbcType="VARCHAR"/>
+        <result property="visibleType" column="visible_type" jdbcType="INTEGER"/>
+        <result property="isRepairDiary" column="is_repair_diary" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        project_id,
+        publisher_id,
+        address_latitude,
+        address_longitude,
+        curr_diary_punch_card_day_num,
+        punch_card_address,
+        punch_card_time,
+        text_content,
+        visible_type,
+        is_repair_diary,
+    </sql>
+
+
+</mapper>

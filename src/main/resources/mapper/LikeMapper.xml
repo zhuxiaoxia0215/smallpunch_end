@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miniprogram.mapper.LikeMapper">
+
+    <resultMap type="com.miniprogram.entity.Like" id="LikeMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="diaryId" column="diary_id" jdbcType="INTEGER"/>
+        <result property="admirerId" column="admirer_id" jdbcType="INTEGER"/>
+        <result property="isRead" column="is_read" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        diary_id,
+        admirer_id,
+        is_read,
+    </sql>
+
+
+</mapper>
