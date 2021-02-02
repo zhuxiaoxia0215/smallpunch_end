@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Project)表数据库访问层
@@ -16,5 +17,7 @@ import java.util.List;
 public interface ProjectMapper {
 
     List<HashMap> selectByUserId (Integer userId);
+
+   Map selectProjectByDiaryId(Integer diaryId);
 
 }

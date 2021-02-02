@@ -5,6 +5,7 @@ import com.miniprogram.service.DiaryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * (Diary)表服务实现类
@@ -16,5 +17,17 @@ import javax.annotation.Resource;
 public class DiaryServiceImpl implements DiaryService {
     @Resource
     private DiaryMapper diaryMapper;
+
+    @Override
+    public Map selectDiaryById(Integer diaryId) {
+        Map map = diaryMapper.selectDiaryById(diaryId);
+        return map;
+    }
+
+    @Override
+    public Map getPunchCardNum(Integer projectId) {
+        return diaryMapper.selectDiaryById(projectId);
+    }
+
 
 }

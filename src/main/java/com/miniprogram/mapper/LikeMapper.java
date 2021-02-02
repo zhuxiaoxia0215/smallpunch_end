@@ -4,6 +4,7 @@ import com.miniprogram.entity.Like;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,5 +17,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface LikeMapper {
 
-
+    List<Map> selectLikeByDiaryId (Integer diaryId);
 }

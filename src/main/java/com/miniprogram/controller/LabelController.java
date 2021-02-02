@@ -20,8 +20,14 @@ public class LabelController {
     @GetMapping("/getAllTypeLabel")
     public Map getAllTypeLabel(HttpServletRequest request){
         Map outerMap = new HashMap();
-        outerMap.put("data",labelService.getAllTypeLabel());
-        outerMap.put("sucMsg","获取圈子类型标签成功");
-        return outerMap;
+        try{
+            outerMap.put("data",labelService.getAllTypeLabel());
+            outerMap.put("sucMsg","获取圈子类型标签成功");
+            return outerMap;
+        }catch(Exception e){
+            outerMap.put("data",null);
+            outerMap.put("errMsg","获取圈子类型标签失败");
+            return outerMap;
+        }
     }
 }

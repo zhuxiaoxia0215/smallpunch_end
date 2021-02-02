@@ -54,7 +54,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <version>2.2.1.RELEASE</version>
-            <optional>true</optional> <!--值为true时热部署才有效 -->
+            <optional>false</optional> <!--值为true时热部署才有效 -->
         </dependency>
 
         <dependency>

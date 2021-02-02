@@ -3,6 +3,7 @@ package com.miniprogram.service;
 import com.miniprogram.entity.Like;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Like)表服务接口
@@ -12,5 +13,5 @@ import java.util.List;
  */
 public interface LikeService {
 
-
+    List getLikeInfo(Integer diaryId);
 }

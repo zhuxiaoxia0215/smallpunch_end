@@ -9,18 +9,17 @@
         <result property="creatorId" column="creator_id" jdbcType="INTEGER"/>
         <result property="creatorIntroduce" column="creator_introduce" jdbcType="VARCHAR"/>
     </resultMap>
-
-    <sql id="Base_Column_List">
-        id,
-        project_name,
-        cover_img_url,
-        creator_id,
-        creator_introduce
-    </sql>
+    
     <select id="selectByUserId" resultType="java.util.HashMap">
         select project.id,project_name,cover_img_url,creator_id,is_creator
         from project,attend_user
         where project.id =attend_user.project_id and user_id= #{userId}
+    </select>
+    
+    <select id="selectProjectByDiaryId" resultType="java.util.HashMap">
+        select project.id,project_name,cover_img_url
+        from project,diary
+        where diary.id=#{diaryId} and diary.project_id=project.id
     </select>
 
 

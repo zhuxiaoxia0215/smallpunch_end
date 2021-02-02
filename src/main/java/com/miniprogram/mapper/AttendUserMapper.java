@@ -2,6 +2,8 @@ package com.miniprogram.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Map;
+
 /**
  * (AttendUser)表数据库访问层
  *
@@ -11,5 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface AttendUserMapper {
 
+    Map getAttendUserNumByProjectId (Integer projectId );
 
 }

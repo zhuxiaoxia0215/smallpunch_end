@@ -10,13 +10,11 @@
         <result property="attendTime" column="attend_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <sql id="Base_Column_List">
-        id,
-        project_id,
-        user_id,
-        is_creator,
-        attend_time,
-    </sql>
+    <select id="getAttendUserNumByProjectId" resultType="java.util.HashMap">
+        select count(id) as attend_user_num
+        from attend_user
+        where project_id=#{projectId}
+    </select>
 
 
 </mapper>

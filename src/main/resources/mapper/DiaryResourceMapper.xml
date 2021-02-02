@@ -9,12 +9,10 @@
         <result property="type" column="type" jdbcType="INTEGER"/>
     </resultMap>
 
-    <sql id="Base_Column_List">
-        id,
-        diary_id,
-        resource_url,
-        type
-    </sql>
-
+    <select id="selectDiaryResourceByDiaryId" resultType="java.util.HashMap">
+        select id,resource_url,type
+        from diary_resource
+        where diary_id=#{diaryId}
+    </select>
 
 </mapper>

@@ -2,6 +2,9 @@ package com.miniprogram.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * (DiaryResource)表数据库访问层
  *
@@ -11,5 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface DiaryResourceMapper {
 
+    List<Map> selectDiaryResourceByDiaryId(Integer diaryid);
 
 }

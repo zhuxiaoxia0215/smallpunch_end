@@ -29,6 +29,15 @@
         visible_type,
         is_repair_diary
     </sql>
+    <select id="selectDiaryById" resultType="java.util.HashMap">
+        select id,address_latitude,address_longitude,punch_card_address,punch_card_time,text_content
+        from diary
+        where id=#{diaryId}
+    </select>
 
-
+    <select id="getPunchCardNumByProjectId" resultType="java.util.HashMap">
+        select count(id) as all_punch_card_num
+        from diary
+        where project_id=#{projectId}
+    </select>
 </mapper>

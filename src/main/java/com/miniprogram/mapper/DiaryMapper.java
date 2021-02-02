@@ -2,6 +2,8 @@ package com.miniprogram.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Map;
+
 /**
  * (Diary)表数据库访问层
  *
@@ -11,5 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface DiaryMapper {
 
+    Map selectDiaryById (Integer diaryId);
 
+    Map getPunchCardNumByProjectId (Integer projectId);
 }

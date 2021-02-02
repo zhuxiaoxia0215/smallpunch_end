@@ -9,12 +9,12 @@
         <result property="isRead" column="is_read" jdbcType="INTEGER"/>
     </resultMap>
 
-    <sql id="Base_Column_List">
-        id,
-        diary_id,
-        admirer_id,
-        is_read
-    </sql>
+    <select id="selectLikeByDiaryId" resultType="java.util.HashMap">
+        select id,admirer_id
+        from like_info
+        where diary_id=#{diaryId}
+    </select>
+
 
 
 </mapper>

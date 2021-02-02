@@ -3,6 +3,7 @@ package com.miniprogram.mapper;
 import com.miniprogram.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,4 +21,10 @@ public interface UserInfoMapper {
     int insert (String openId,String nickName,String avatarUrl,String sex);
 
     Map selectById(Integer userId);
+
+    Map selectRespondentByDiaryId(Integer diaryId);
+
+    Map selectReviewerByDiaryId(Integer commentId);
+
+    Map selectAdmirerById(Integer id);
 }

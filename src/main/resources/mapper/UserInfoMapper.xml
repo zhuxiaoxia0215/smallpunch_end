@@ -42,4 +42,22 @@
         from user_info
         where user_info.id=#{userId}
     </select>
+
+    <select id="selectRespondentByDiaryId" resultType="java.util.HashMap">
+        select user_info.id,nick_name,avatar_url,sex
+        from user_info,diary
+        where user_info.id=diary.publisher_id and diary.id = #{diaryId}
+    </select>
+
+    <select id="selectReviewerByDiaryId" resultType="java.util.HashMap">
+        select user_info.id,nick_name,avatar_url,sex
+        from user_info,comment
+        where user_info.id=reviewer and comment.id=#{commentId}
+    </select>
+
+    <select id="selectAdmirerById" resultType="java.util.HashMap">
+        select id ,avatar_url
+        from user_info
+        where id=#{admirerId}
+    </select>
 </mapper>

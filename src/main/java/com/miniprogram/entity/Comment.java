@@ -7,10 +7,10 @@ import java.util.Date;
  * (Comment)实体类
  *
  * @author zhuxiaoxia
- * @since 2021-01-29 09:59:15
+ * @since 2021-02-01 11:17:32
  */
 public class Comment implements Serializable {
-    private static final long serialVersionUID = 144527876563243536L;
+    private static final long serialVersionUID = -69307415093984380L;
 
     private Integer id;
     /**
@@ -22,10 +22,20 @@ public class Comment implements Serializable {
      */
     private Integer reviewer;
     /**
+     * 文本内容
+     */
+    private String textComment;
+    /**
+     * 语音内容
+     */
+    private String soundComment;
+    /**
      * 回复时间
      */
     private Date createTime;
-
+    /**
+     * 当前评论所属的父级评论的id
+     */
     private Integer pid;
     /**
      * 是否已读 0.未读 1.已读
@@ -55,6 +65,22 @@ public class Comment implements Serializable {
 
     public void setReviewer(Integer reviewer) {
         this.reviewer = reviewer;
+    }
+
+    public String getTextComment() {
+        return textComment;
+    }
+
+    public void setTextComment(String textComment) {
+        this.textComment = textComment;
+    }
+
+    public String getSoundComment() {
+        return soundComment;
+    }
+
+    public void setSoundComment(String soundComment) {
+        this.soundComment = soundComment;
     }
 
     public Date getCreateTime() {

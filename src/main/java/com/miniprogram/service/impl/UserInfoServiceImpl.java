@@ -6,7 +6,6 @@ import com.miniprogram.service.UserInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -34,6 +33,21 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public Map selectById(Integer userId) {
         return userInfoMapper.selectById(userId);
+    }
+
+    @Override
+    public Map selectRespondentByDiaryId(Integer diaryId) {
+        return userInfoMapper.selectRespondentByDiaryId(diaryId);
+    }
+
+    @Override
+    public Map selectReviewerByDiaryId(Integer diaryId) {
+        return userInfoMapper.selectReviewerByDiaryId(diaryId);
+    }
+
+    @Override
+    public Map selectAdmirerById(Integer admirerId) {
+        return userInfoMapper.selectAdmirerById(admirerId);
     }
 
 

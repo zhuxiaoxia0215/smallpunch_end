@@ -5,6 +5,7 @@ import com.miniprogram.service.AttendUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * (AttendUser)表服务实现类
@@ -17,4 +18,8 @@ public class AttendUserServiceImpl implements AttendUserService {
     @Resource
     private AttendUserMapper attendUserMapper;
 
+    @Override
+    public Map getAttendUserNum(Integer projectId) {
+        return attendUserMapper.getAttendUserNumByProjectId(projectId);
+    }
 }

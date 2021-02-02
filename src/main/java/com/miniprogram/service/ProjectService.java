@@ -13,4 +13,6 @@ public interface ProjectService {
 
     List selectByUserId(Integer userId);
 
+    Map selectProjectInfo(Integer diaryId);
+
 }

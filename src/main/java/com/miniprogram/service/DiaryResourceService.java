@@ -1,5 +1,8 @@
 package com.miniprogram.service;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * (DiaryResource)表服务接口
  *
@@ -8,5 +11,6 @@ package com.miniprogram.service;
  */
 public interface DiaryResourceService {
 
+    List<Map> getDiaryResource(Integer diaryId);
 
 }

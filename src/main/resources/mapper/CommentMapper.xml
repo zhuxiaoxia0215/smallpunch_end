@@ -6,6 +6,8 @@
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="diaryId" column="diary_id" jdbcType="INTEGER"/>
         <result property="reviewer" column="reviewer" jdbcType="INTEGER"/>
+        <result property="textComment" column="text_comment" jdbcType="VARCHAR"/>
+        <result property="soundComment" column="sound_comment" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="pid" column="pid" jdbcType="INTEGER"/>
         <result property="isRead" column="is_read" jdbcType="INTEGER"/>
@@ -15,10 +17,16 @@
         id,
         diary_id,
         reviewer,
+        text_comment,
+        sound_comment,
         create_time,
         pid,
         is_read
     </sql>
-
+    <select id="selectByDiaryId" resultType="java.util.HashMap">
+        select id,diary_id,text_comment,sound_comment,pid,create_time
+        from comment
+        where diary_id=#{diaryId}
+    </select>
 
 </mapper>

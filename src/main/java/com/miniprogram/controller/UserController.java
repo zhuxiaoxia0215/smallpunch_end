@@ -64,21 +64,35 @@ public class UserController {
     public Map addUserInfo(HttpServletRequest request, @RequestParam("open_id") String openId,
                                     @RequestParam("nick_name") String nickName, @RequestParam("avatar_url") String avatarUrl,
                                     @RequestParam("sex") String sex){
-        UserInfo userInfo = userInfoService.addUserInfo(openId,nickName,avatarUrl,sex);
         Map map=new HashMap<String, Object>();
-        map.put("userInfo", userInfo);
-        return map;
+        try{
+            UserInfo userInfo = userInfoService.addUserInfo(openId,nickName,avatarUrl,sex);
+            map.put("userInfo", userInfo);
+            return map;
+        }catch(Exception e){
+            map.put("data",null);
+            map.put("errMsg","获取我的打卡圈子列表失败");
+            return map;
+        }
     }
 
     @RequestMapping(value = "/User/getAllProject")
     public Map getAllproject(HttpServletRequest request,@RequestBody Map<String, Object> json){
-        Integer userId = (Integer) json.get("userId");
+
         Map outerMap =new HashMap();
-        Map map = userInfoService.selectById(userId);
-        map.put("punchCardProjectList",projectService.selectByUserId(userId));
-        outerMap.put("data",map);
-        outerMap.put("sucMsg","获取我的打卡圈子列表成功!");
-        return outerMap;
+        try{
+            Integer userId = (Integer) json.get("userId");
+            Map map = userInfoService.selectById(userId);
+            map.put("punchCardProjectList",projectService.selectByUserId(userId));
+            outerMap.put("data",map);
+            outerMap.put("sucMsg","获取我的打卡圈子列表成功!");
+            return outerMap;
+        }catch(Exception e){
+            outerMap.put("data",null);
+            outerMap.put("errMsg","获取我的打卡圈子列表失败");
+            return outerMap;
+        }
+
     }
 
 
