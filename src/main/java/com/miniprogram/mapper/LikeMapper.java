@@ -18,4 +18,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface LikeMapper {
 
     List<Map> selectLikeByDiaryId (Integer diaryId);
+
+    Map<String,Object> selectLikeRecore(Integer diaryId,Integer userId);
 }

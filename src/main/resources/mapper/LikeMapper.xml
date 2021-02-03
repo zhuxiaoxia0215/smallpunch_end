@@ -14,7 +14,12 @@
         from like_info
         where diary_id=#{diaryId}
     </select>
-
+    
+    <select id="selectLikeRecore" resultType="java.util.HashMap">
+        select id as likeRecordId
+        from like_info
+        where diary_id=#{diaryId} and admirer_id=#{userId}
+    </select>
 
 
 </mapper>

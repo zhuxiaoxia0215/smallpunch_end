@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,5 +39,18 @@ public class LikeServiceImpl implements LikeService {
             allLikeInfo.add(likeInfo);
         }
         return allLikeInfo;
+    }
+
+    @Override
+    public Map<String, Object> selectLikeRecore(Integer userId, Integer diaryId) {
+        Map<String,Object> map = likeMapper.selectLikeRecore(diaryId,userId);
+        if(map != null){
+            map.put("haveLike",true);
+        }else {
+            map =new HashMap<>();
+            map.put("haveLike",false);
+            map.put("likeRecordId",0);
+        }
+        return map;
     }
 }

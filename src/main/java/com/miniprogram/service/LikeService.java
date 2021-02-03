@@ -14,4 +14,6 @@ import java.util.Map;
 public interface LikeService {
 
     List getLikeInfo(Integer diaryId);
+
+    Map<String,Object> selectLikeRecore(Integer userId,Integer diaryId);
 }

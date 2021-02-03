@@ -5,6 +5,7 @@ import com.miniprogram.service.AttendUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,4 +23,15 @@ public class AttendUserServiceImpl implements AttendUserService {
     public Map getAttendUserNum(Integer projectId) {
         return attendUserMapper.getAttendUserNumByProjectId(projectId);
     }
+
+    @Override
+    public Boolean existAttendProject(Integer userId, Integer projectId) {
+        Map<String,Integer> map = attendUserMapper.attendId(userId, projectId);
+        if(map != null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

@@ -28,24 +28,30 @@ public class DiaryController {
     private ProjectService projectService;
     @Autowired
     private DiaryResourceService diaryResourceService;
+    @Autowired
+    private AttendUserService attendUserService;
 
     @PostMapping("/getDiaryDetailInfoById")
     public Map getDiaryDetailInfoById (@RequestBody Map<String,Object> json, HttpServletRequest request){
         Map outerMap = new HashMap<String,Object>();
         try{
             Integer diaryId= (Integer) json.get("diaryId");
-            //Integer vistorId = (Integer) json.get("visitorId");
+            Integer vistorId = (Integer) json.get("visitorId");
             Map diaryMap = diaryService.selectDiaryById(diaryId);
             List<Map> commentList=commentService.getDiaryComment(diaryId);
             List<Map> likeList=likeService.getLikeInfo(diaryId);
             List<Map> diaryResourceList=diaryResourceService.getDiaryResource(diaryId);
+            Map projectInfo = projectService.selectProjectInfo(diaryId);
+            Integer projectId =(Integer)projectInfo.get("projectId");
             diaryMap.put("allCommentInfo",commentList);
             diaryMap.put("allLikeInfo",likeList);
             diaryMap.put("comment_num",commentList.size());
             diaryMap.put("like_user_num",likeList.size());
             diaryMap.put("diaryResource",diaryResourceList);
             diaryMap.put("publisher",userInfoService.selectRespondentByDiaryId(diaryId));
-            diaryMap.put("projectInfo",projectService.selectProjectInfo(diaryId));
+            diaryMap.put("projectInfo",projectInfo);
+            diaryMap.put("existAttendProject",attendUserService.existAttendProject(vistorId,projectId));
+            diaryMap.putAll(likeService.selectLikeRecore(vistorId,diaryId));
             outerMap.put("data",diaryMap);
             outerMap.put("sucMsg","获取日记详情成功");
             return outerMap;

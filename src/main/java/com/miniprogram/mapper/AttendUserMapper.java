@@ -13,6 +13,8 @@ import java.util.Map;
 @Mapper
 public interface AttendUserMapper {
 
-    Map getAttendUserNumByProjectId (Integer projectId );
+    Map<String,Object> getAttendUserNumByProjectId (Integer projectId );
+
+    Map<String,Integer> attendId (Integer userId,Integer projectId);
 
 }

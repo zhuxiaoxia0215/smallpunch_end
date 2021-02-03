@@ -12,5 +12,7 @@ public interface AttendUserService {
 
     Map getAttendUserNum (Integer projectId);
 
+    Boolean existAttendProject( Integer userId,Integer projectId);
+
 
 }
