@@ -2,6 +2,7 @@ package com.miniprogram.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,4 +17,6 @@ public interface DiaryMapper {
     Map selectDiaryById (Integer diaryId);
 
     Map getPunchCardNumByProjectId (Integer projectId);
+
+    List<Map> selectDiaryByProject (Integer ProjectId);
 }

@@ -5,6 +5,7 @@ import com.miniprogram.service.DiaryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,6 +28,12 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public Map getPunchCardNum(Integer projectId) {
         return diaryMapper.selectDiaryById(projectId);
+    }
+
+    @Override
+    public List selectDiaryByProject(Integer projectId) {
+
+        return diaryMapper.selectDiaryByProject(projectId);
     }
 
 

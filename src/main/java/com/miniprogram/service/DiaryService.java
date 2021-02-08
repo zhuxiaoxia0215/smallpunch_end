@@ -1,5 +1,6 @@
 package com.miniprogram.service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,5 +14,7 @@ public interface DiaryService {
     Map selectDiaryById (Integer diaryId);
 
     Map getPunchCardNum (Integer projectId);
+
+    List<Map> selectDiaryByProject (Integer projectId);
 
 }

@@ -1,5 +1,7 @@
 package com.miniprogram.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.miniprogram.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,5 +63,37 @@ public class DiaryController {
             outerMap.put("errMsg","获取日记详情失败");
             return outerMap;
         }
+    }
+
+    @PostMapping("/getDiaryListByRecommend")
+    public Map getDiaryListByRecommend (@RequestBody Map<String,Object> json,HttpServletRequest request){
+        Map<String,Object> outerMap =new HashMap<>();
+        try{
+            int startPage=(Integer) json.get("pageNo");
+            int pageSize= (Integer) json.get("dataNum");
+            Integer userId = (Integer) json.get("userId");
+            List<Integer> projectIdList = (List) json.get("projectIdList");
+
+            Page page= PageHelper.startPage(startPage, pageSize);
+// 从数据库查询，这里返回的的allUser就已经分页成功了
+            List<Map> allDiary = new ArrayList<>();
+            for (Integer projectId :projectIdList){
+                allDiary.addAll(diaryService.selectDiaryByProject(projectId));
+            }
+
+// 获取查询记录总数，必须位于从数据库查询数据的语句之后，否则不生效
+            long total = page.getTotal();
+
+// 一下是layui的分页要求的信息
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("code",0);
+            map.put("msg","请求成功");
+            //map.put("data",allUser);
+            map.put("count",total);
+
+        }catch (Exception e){
+
+        }
+        return outerMap;
     }
 }
