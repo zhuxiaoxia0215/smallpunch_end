@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,6 +33,12 @@ public class AttendUserServiceImpl implements AttendUserService {
         }else{
             return false;
         }
+    }
+
+    @Override
+    public List getRecentAttendUser(Integer projectId){
+        List<Map<String,String>> list= attendUserMapper.getRecentAttendUser(projectId);
+        return list ;
     }
 
 }

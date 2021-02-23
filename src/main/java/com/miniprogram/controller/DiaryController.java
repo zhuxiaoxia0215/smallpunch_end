@@ -2,6 +2,7 @@ package com.miniprogram.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.miniprogram.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,30 +70,46 @@ public class DiaryController {
     public Map getDiaryListByRecommend (@RequestBody Map<String,Object> json,HttpServletRequest request){
         Map<String,Object> outerMap =new HashMap<>();
         try{
-            int startPage=(Integer) json.get("pageNo");
-            int pageSize= (Integer) json.get("dataNum");
+            int PageNo=(Integer) json.get("pageNo");
+            int dataNum= (Integer) json.get("dataNum");
             Integer userId = (Integer) json.get("userId");
             List<Integer> projectIdList = (List) json.get("projectIdList");
-
-            Page page= PageHelper.startPage(startPage, pageSize);
-// 从数据库查询，这里返回的的allUser就已经分页成功了
             List<Map> allDiary = new ArrayList<>();
+            List<Map> diaryIdList = new ArrayList<>();
             for (Integer projectId :projectIdList){
                 allDiary.addAll(diaryService.selectDiaryByProject(projectId));
             }
+            for( int i=0; i<allDiary.size(); i++){
+                Integer diaryId = (Integer) allDiary.get(i).get("id");
+                List<Map> diaryResourceList=diaryResourceService.getDiaryResource(diaryId);
+                List<Map> commentList=commentService.getDiaryComment(diaryId);
+                List<Map> likeList=likeService.getLikeInfo(diaryId);
+                Map projectInfo = projectService.selectRecommendProjectInfo(diaryId);
+                Integer projectId = (Integer) projectInfo.get("id");
+                allDiary.get(i).put("diaryResource",diaryResourceList);
+                allDiary.get(i).put("comment_num",commentList.size());
+                allDiary.get(i).putAll(likeService.selectLikeRecore(userId,diaryId));
+                allDiary.get(i).put("like_user_num",likeList.size());
+                allDiary.get(i).put("publisher",userInfoService.selectRespondentByDiaryId(diaryId));
+                allDiary.get(i).put("projectInfo",projectInfo);
+                allDiary.get(i).put("recentThreeAttendUserList",attendUserService.getRecentAttendUser(projectId));
 
-// 获取查询记录总数，必须位于从数据库查询数据的语句之后，否则不生效
-            long total = page.getTotal();
+            }
+            List<Map> pageInfo = new ArrayList<>();
+            int start = (PageNo-1)*dataNum;
+            for( int i= start; i<start+dataNum;i++){
+                if(i<allDiary.size()){
+                    pageInfo.add(allDiary.get(i));
+                }else{
+                    break;
+                }
 
-// 一下是layui的分页要求的信息
-            HashMap<String, Object> map = new HashMap<>();
-            map.put("code",0);
-            map.put("msg","请求成功");
-            //map.put("data",allUser);
-            map.put("count",total);
+            }
+            outerMap.put("data",pageInfo);
+            outerMap.put("susMsg","操作成功");
 
         }catch (Exception e){
-
+            outerMap.put("errMsg",e.getMessage());
         }
         return outerMap;
     }

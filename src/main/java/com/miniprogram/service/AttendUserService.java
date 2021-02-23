@@ -1,5 +1,6 @@
 package com.miniprogram.service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,5 +15,6 @@ public interface AttendUserService {
 
     Boolean existAttendProject( Integer userId,Integer projectId);
 
+    List<Map<String,String>> getRecentAttendUser(Integer projectId);
 
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miniprogram.mapper.ProjectLabelMapper">
+
+    <resultMap type="com.miniprogram.entity.ProjectLabel" id="ProjectLabelMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="projectId" column="project_id" jdbcType="INTEGER"/>
+        <result property="labelId" column="label_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="selectTypeLabel" resultType="Map">
+--         select label.label_name as child_label, parentLabel.label_name as parent_label
+--         from project_label,label,(select id,label_name from label where parent_id=0)parentLabel
+--         where project_label.label_id=label.id and label.parent_id=parentLabel.id and project_label.project_id = #{projectId}
+    </select>
+    <insert id="createProjectLabel" >
+        insert into project_label
+        (project_id, type_label)
+        values (#{projectId},#{typeLabel})
+    </insert>
+
+</mapper>

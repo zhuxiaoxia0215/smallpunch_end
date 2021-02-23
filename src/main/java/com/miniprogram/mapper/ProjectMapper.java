@@ -18,6 +18,7 @@ public interface ProjectMapper {
 
     List<HashMap> selectByUserId (Integer userId);
 
-   Map selectProjectByDiaryId(Integer diaryId);
+    Map selectProjectByDiaryId(Integer diaryId);
 
+    Integer createProject(Project project);
 }

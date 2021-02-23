@@ -3,6 +3,7 @@ package com.miniprogram.service.impl;
 import com.miniprogram.entity.Project;
 import com.miniprogram.mapper.AttendUserMapper;
 import com.miniprogram.mapper.DiaryMapper;
+import com.miniprogram.mapper.ProjectLabelMapper;
 import com.miniprogram.mapper.ProjectMapper;
 import com.miniprogram.service.ProjectService;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,8 @@ public class ProjectServiceImpl implements ProjectService {
     private DiaryMapper diaryMapper;
     @Resource
     private AttendUserMapper attendUserMapper;
+    @Resource
+    private ProjectLabelMapper projectLabelMapper;
 
     @Override
     public List selectByUserId(Integer userId) {
@@ -41,5 +44,18 @@ public class ProjectServiceImpl implements ProjectService {
         projectMap.putAll(diaryMapper.getPunchCardNumByProjectId(projectId));
         projectMap.putAll(attendUserMapper.getAttendUserNumByProjectId(projectId));
         return projectMap;
+    }
+
+    @Override
+    public Map selectRecommendProjectInfo(Integer diaryId) {
+        Map projectMap = projectMapper.selectProjectByDiaryId(diaryId);
+        Integer projectId= (Integer) projectMap.get("id");
+        projectMap.put("type_label",projectLabelMapper.selectTypeLabel(projectId));
+        return projectMap;
+    }
+
+    @Override
+    public Integer createProject(Project project){
+        return projectMapper.createProject(project);
     }
 }

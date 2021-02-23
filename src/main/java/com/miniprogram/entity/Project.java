@@ -29,6 +29,15 @@ public class Project implements Serializable {
      */
     private String creatorIntroduce;
 
+    private Integer privacyType;
+
+    public Integer getPrivacyType() {
+        return privacyType;
+    }
+
+    public void setPrivacyType(Integer privacyType) {
+        this.privacyType = privacyType;
+    }
 
     public Integer getId() {
         return id;

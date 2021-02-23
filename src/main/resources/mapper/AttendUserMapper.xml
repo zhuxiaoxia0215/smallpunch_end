@@ -13,6 +13,14 @@
         from attend_user
         where project_id=#{projectId} and user_id=#{userId}
     </select>
+    
+    <select id="getRecentAttendUser" resultType="java.util.HashMap">
+        select avatar_url
+        from attend_user,user_info
+        where attend_user.user_id =user_info.id and project_id=#{projectId}
+        order by attend_time desc
+        limit 0,3
+    </select>
 
 
 </mapper>
