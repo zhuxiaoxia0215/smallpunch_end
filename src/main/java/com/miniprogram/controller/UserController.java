@@ -5,6 +5,7 @@ import com.miniprogram.bean.OutputObject;
 import com.miniprogram.entity.Project;
 import com.miniprogram.entity.UserInfo;
 import com.miniprogram.entity.OpenIdJson;
+import com.miniprogram.service.AttendUserService;
 import com.miniprogram.service.ProjectService;
 import com.miniprogram.service.UserInfoService;
 import com.miniprogram.utils.HttpUtil;
@@ -26,6 +27,8 @@ public class UserController {
     private UserInfoService userInfoService;
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private AttendUserService attendUserService;
 
  /**
    * 根据code换取openid和session_key
@@ -86,13 +89,35 @@ public class UserController {
             map.put("punchCardProjectList",projectService.selectByUserId(userId));
             outerMap.put("data",map);
             outerMap.put("sucMsg","获取我的打卡圈子列表成功!");
-            return outerMap;
         }catch(Exception e){
             outerMap.put("data",null);
             outerMap.put("errMsg","获取我的打卡圈子列表失败");
-            return outerMap;
         }
+        return outerMap;
+    }
 
+    @PostMapping("/User/checkUserIsAttend")
+    public Map checkUserIsAttend(HttpServletRequest request,@RequestBody Map<String, Object> json){
+        Map rtnMap = new HashMap();
+        try{
+            Integer projectId = (Integer) json.get("projectId");
+            Integer userId = (Integer) json.get("userId");
+            Map data = new HashMap();
+
+            Map<String,Integer> map = attendUserService.getAttendId(userId, projectId);
+            if(map != null){
+                data.put("checkUserIsAttendRes",true);
+            }else{
+                data.put("checkUserIsAttendRes",false);
+            }
+            rtnMap.put("data",data);
+            rtnMap.put("sucMsg","检测用户是否已参与打卡圈子成功");
+
+        }catch (Exception e){
+            rtnMap.put("data",null);
+            rtnMap.put("errMsg",e.getMessage());
+        }
+        return rtnMap;
     }
 
 

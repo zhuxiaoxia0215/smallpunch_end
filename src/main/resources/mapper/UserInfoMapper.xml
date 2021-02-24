@@ -60,4 +60,10 @@
         from user_info
         where id=#{admirerId}
     </select>
+
+    <select id="selectUserById" resultType="java.util.HashMap">
+        select id,nick_name,sex,avatar_url
+        from user_info
+        where id=#{userId}
+    </select>
 </mapper>

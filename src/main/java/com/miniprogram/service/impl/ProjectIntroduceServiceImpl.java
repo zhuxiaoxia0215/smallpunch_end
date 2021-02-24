@@ -5,6 +5,8 @@ import com.miniprogram.service.ProjectIntroduceService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * (ProjectIntroduce)表服务实现类
@@ -17,4 +19,8 @@ public class ProjectIntroduceServiceImpl implements ProjectIntroduceService {
     @Resource
     private ProjectIntroduceMapper projectIntroduceMapper;
 
+    @Override
+    public List<Map> getProjectIntr(Integer projectId){
+        return projectIntroduceMapper.getProjectIntr(projectId);
+    }
 }

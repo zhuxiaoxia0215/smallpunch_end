@@ -22,5 +22,10 @@
         limit 0,3
     </select>
 
+    <select id="getAttendUser" resultType="java.util.HashMap">
+        select id,user_id,date_format(attend_time,'%Y-%m-%d') attend_time
+        from attend_user
+        where project_id= #{project_Id}
+    </select>
 
 </mapper>

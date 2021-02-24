@@ -15,5 +15,11 @@
         type,
         order
     </sql>
+    
+    <select id="getProjectIntr" resultType="HashMap">
+        select id,content,type,"order"
+        from project_introduce
+        where project_id=#{projectId}
+    </select>
 
 </mapper>

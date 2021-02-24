@@ -21,4 +21,6 @@ public interface ProjectService {
 
     Integer createProject(Project project);
 
+    Map<String,Object> getProjectInfoById (Integer projectId);
+
 }

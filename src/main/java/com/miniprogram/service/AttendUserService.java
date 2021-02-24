@@ -17,4 +17,7 @@ public interface AttendUserService {
 
     List<Map<String,String>> getRecentAttendUser(Integer projectId);
 
+    List<Map> getAttendUser (Integer projectId);
+
+    Map<String,Integer> getAttendId (Integer userId, Integer projectId);
 }

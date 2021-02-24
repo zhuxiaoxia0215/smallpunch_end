@@ -1,11 +1,13 @@
 package com.miniprogram.service.impl;
 
 import com.miniprogram.mapper.AttendUserMapper;
+import com.miniprogram.mapper.UserInfoMapper;
 import com.miniprogram.service.AttendUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +21,8 @@ import java.util.Map;
 public class AttendUserServiceImpl implements AttendUserService {
     @Resource
     private AttendUserMapper attendUserMapper;
+    @Resource
+    private UserInfoMapper userInfoMapper;
 
     @Override
     public Map getAttendUserNum(Integer projectId) {
@@ -39,6 +43,27 @@ public class AttendUserServiceImpl implements AttendUserService {
     public List getRecentAttendUser(Integer projectId){
         List<Map<String,String>> list= attendUserMapper.getRecentAttendUser(projectId);
         return list ;
+    }
+
+    @Override
+    public List<Map> getAttendUser(Integer projectId) {
+        List<Map> attendUserList = attendUserMapper.getAttendUser(projectId);
+        List<Map> attendUserList1 = new LinkedList<>();
+        for(Map attendUser : attendUserList){
+            Integer userId = (Integer) attendUser.get("user_id");
+            Map attendUserMap = userInfoMapper.selectUserById(userId);
+            Map pivot = new HashMap();
+            pivot.put("id",attendUser.get("id"));
+            pivot.put("attend_time",attendUser.get("attend_time"));
+            attendUserMap.put("pivot",pivot);
+            attendUserList1.add(attendUserMap);
+        }
+        return attendUserList1;
+    }
+
+    @Override
+    public Map<String, Integer> getAttendId(Integer userId, Integer projectId) {
+        return attendUserMapper.attendId(userId,projectId);
     }
 
 }

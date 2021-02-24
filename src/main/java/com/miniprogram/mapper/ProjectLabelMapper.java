@@ -1,9 +1,9 @@
 package com.miniprogram.mapper;
 
-import com.miniprogram.entity.Project;
+import com.miniprogram.entity.ProjectLabel;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,8 +15,8 @@ import java.util.Map;
 @Mapper
 public interface ProjectLabelMapper {
 
-    List<Map> selectTypeLabel (Integer projectId);
+    Map selectTypeLabel ( Integer projectId);
 
-    Integer createProjectLabel (Project project);
+    Integer createProjectLabel (ProjectLabel projectLabel);
 
 }

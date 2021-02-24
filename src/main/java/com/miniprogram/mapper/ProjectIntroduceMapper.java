@@ -2,6 +2,9 @@ package com.miniprogram.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * (ProjectIntroduce)表数据库访问层
  *
@@ -10,6 +13,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ProjectIntroduceMapper {
+
+    List<Map> getProjectIntr (Integer projectId);
 
 
 }

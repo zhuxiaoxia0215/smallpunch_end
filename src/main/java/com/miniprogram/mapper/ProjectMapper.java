@@ -21,4 +21,6 @@ public interface ProjectMapper {
     Map selectProjectByDiaryId(Integer diaryId);
 
     Integer createProject(Project project);
+
+    Map<String,Object> getProjectInfoById (Integer project);
 }

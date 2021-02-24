@@ -63,5 +63,11 @@
         </trim>
     </insert>
 
+    <select id="getProjectInfoById" resultType="java.util.HashMap">
+        select project.id,project_name,cover_img_url,creator_id,creator_introduce,nick_name as creator_nick_name,sex as creator_sex,avatar_url as creator_avatar_url,user_info.weixin_Num as weixin_num
+        from project,user_info
+        where project.creator_id = user_info.id and project.id=#{projectId}
+    </select>
+
 
 </mapper>

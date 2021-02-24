@@ -5,18 +5,38 @@
     <resultMap type="com.miniprogram.entity.ProjectLabel" id="ProjectLabelMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="projectId" column="project_id" jdbcType="INTEGER"/>
-        <result property="labelId" column="label_id" jdbcType="INTEGER"/>
+        <result property="typeLabel" column="type_label" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="selectTypeLabel" resultType="Map">
---         select label.label_name as child_label, parentLabel.label_name as parent_label
---         from project_label,label,(select id,label_name from label where parent_id=0)parentLabel
---         where project_label.label_id=label.id and label.parent_id=parentLabel.id and project_label.project_id = #{projectId}
+           select type_label
+           from project_label
+           where project_id= #{projectId,jdbcType = INTEGER}
     </select>
-    <insert id="createProjectLabel" >
+    <insert id="createProjectLabel" parameterType="com.miniprogram.entity.ProjectLabel">
         insert into project_label
-        (project_id, type_label)
-        values (#{projectId},#{typeLabel})
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="projectId !=null">
+                project_id,
+            </if>
+            <if test="typeLabel !=null">
+                type_label,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="id !=null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="projectId !=null">
+                #{projectId,jdbcType=INTEGER},
+            </if>
+            <if test="typeLabel !=null">
+                #{typeLabel,jdbcType=VARCHAR},
+            </if>
+        </trim>
     </insert>
 
 </mapper>

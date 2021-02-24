@@ -27,4 +27,6 @@ public interface UserInfoMapper {
     Map selectReviewerByDiaryId(Integer commentId);
 
     Map selectAdmirerById(Integer id);
+
+    Map selectUserById (Integer userId);
 }

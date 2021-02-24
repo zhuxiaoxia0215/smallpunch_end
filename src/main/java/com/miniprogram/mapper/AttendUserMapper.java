@@ -19,4 +19,6 @@ public interface AttendUserMapper {
     Map<String,Integer> attendId (Integer userId,Integer projectId);
 
     List<Map<String,String>> getRecentAttendUser(Integer projectId);
+
+    List<Map> getAttendUser (Integer projectId);
 }
