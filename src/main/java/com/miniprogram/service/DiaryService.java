@@ -1,5 +1,7 @@
 package com.miniprogram.service;
 
+import com.miniprogram.entity.Diary;
+
 import java.util.List;
 import java.util.Map;
 
@@ -17,4 +19,7 @@ public interface DiaryService {
 
     List<Map> selectDiaryByProject (Integer projectId);
 
+    int addPunchCardDiary(Diary diary);
+
+    int setSticky(Integer diaryId, Integer haveSticky);
 }

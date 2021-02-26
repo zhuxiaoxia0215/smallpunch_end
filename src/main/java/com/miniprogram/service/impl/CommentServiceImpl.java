@@ -1,5 +1,6 @@
 package com.miniprogram.service.impl;
 
+import com.miniprogram.entity.Comment;
 import com.miniprogram.mapper.CommentMapper;
 import com.miniprogram.mapper.UserInfoMapper;
 import com.miniprogram.service.CommentService;
@@ -47,4 +48,28 @@ public class CommentServiceImpl implements CommentService {
         }
         return commentWithUserList;
     }
+
+    @Override
+    public int addComment(Comment comment) {
+        return commentMapper.addComment(comment);
+    }
+
+    @Override
+    public Map selectCommentById(Integer commentId) {
+        Map comment = commentMapper.selectCommentById(commentId);
+        Map respondent=userInfoService.selectUserById((Integer) comment.get("respondent_id"));
+        Map reviewer = userInfoService.selectUserById((Integer) comment.get("reviewer"));
+        comment.remove("respondent_id");
+        comment.remove("reviewer");
+        comment.put("respondent",respondent);
+        comment.put("reviewer",reviewer);
+        return comment;
+    }
+
+    @Override
+    public int deleteCommentById(Integer commentId) {
+        return commentMapper.deleteCommentById(commentId);
+    }
+
+
 }

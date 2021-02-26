@@ -5,6 +5,7 @@
     <resultMap type="com.miniprogram.entity.Comment" id="CommentMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="diaryId" column="diary_id" jdbcType="INTEGER"/>
+        <result property="respondentId" column="respondent_id" jdbcType="INTEGER"/>
         <result property="reviewer" column="reviewer" jdbcType="INTEGER"/>
         <result property="textComment" column="text_comment" jdbcType="VARCHAR"/>
         <result property="soundComment" column="sound_comment" jdbcType="VARCHAR"/>
@@ -13,20 +14,78 @@
         <result property="isRead" column="is_read" jdbcType="INTEGER"/>
     </resultMap>
 
-    <sql id="Base_Column_List">
-        id,
-        diary_id,
-        reviewer,
-        text_comment,
-        sound_comment,
-        create_time,
-        pid,
-        is_read
-    </sql>
+    <insert id="addComment">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="diaryId != null">
+                diary_id,
+            </if>
+            <if test="respondentId != null">
+                respondent_id,
+            </if>
+            <if test="reviewer != null">
+                reviewer,
+            </if>
+            <if test="textComment != null and textComment != ''">
+                text_comment,
+            </if>
+            <if test="soundComment != null and soundComment != ''">
+                sound_comment,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="isRead != null">
+                is_read,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="diaryId != null">
+                #{diaryId},
+            </if>
+            <if test="respondentId != null">
+                #{respondentId},
+            </if>
+            <if test="reviewer != null">
+                #{reviewer},
+            </if>
+            <if test="textComment != null and textComment != ''">
+                #{textComment},
+            </if>
+            <if test="soundComment != null and soundComment != ''">
+                #{soundComment},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="pid != null">
+                #{pid},
+            </if>
+            <if test="isRead != null">
+                #{isRead},
+            </if>
+        </trim>
+    </insert>
+    <delete id="deleteCommentById">
+        delete from comment
+        where id=#{commentId}
+    </delete>
+
     <select id="selectByDiaryId" resultType="java.util.HashMap">
         select id,diary_id,text_comment,sound_comment,pid,create_time
         from comment
         where diary_id=#{diaryId}
     </select>
-
+    
+    <select id="selectCommentById" resultType="java.util.HashMap">
+        select id,diary_id,respondent_id,reviewer,text_comment,sound_comment,create_time,pid,is_read
+        from comment
+        where id=#{commentId}
+    </select>
 </mapper>

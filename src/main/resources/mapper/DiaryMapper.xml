@@ -14,21 +14,14 @@
         <result property="textContent" column="text_content" jdbcType="VARCHAR"/>
         <result property="visibleType" column="visible_type" jdbcType="INTEGER"/>
         <result property="isRepairDiary" column="is_repair_diary" jdbcType="INTEGER"/>
+        <result property="isSticky" column="is_sticky" javaType="INTEGER"/>
     </resultMap>
 
-    <sql id="Base_Column_List">
-        id,
-        project_id,
-        publisher_id,
-        address_latitude,
-        address_longitude,
-        curr_diary_punch_card_day_num,
-        punch_card_address,
-        punch_card_time,
-        text_content,
-        visible_type,
-        is_repair_diary
-    </sql>
+    <update id="setSticky">
+        update diary set is_sticky= #{param2}
+        where id= #{param1}
+    </update>
+
     <select id="selectDiaryById" resultType="java.util.HashMap">
         select id,address_latitude,address_longitude,punch_card_address,punch_card_time,text_content
         from diary
@@ -46,4 +39,76 @@
         from diary,project
         where diary.project_id=project.id and project.id=#{ProjectId}
     </select>
+
+    <insert id="addPunchCardDiary" parameterType="com.miniprogram.entity.Diary">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into diary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="publisherId != null">
+                publisher_id,
+            </if>
+            <if test="addressLatitude != null">
+                address_latitude,
+            </if>
+            <if test="addressLongitude != null">
+                address_longitude,
+            </if>
+            <if test="currDiaryPunchCardDayNum != null">
+                curr_diary_punch_card_day_num,
+            </if>
+            <if test="punchCardAddress != null and punchCardAddress != ''">
+                punch_card_address,
+            </if>
+            <if test="punchCardTime != null">
+                punch_card_time,
+            </if>
+            <if test="textContent != null and textContent != ''">
+                text_content,
+            </if>
+            <if test="visibleType != null">
+                visible_type,
+            </if>
+            <if test="isRepairDiary != null">
+                is_repair_diary,
+            </if>
+            《
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                #{projectId},
+            </if>
+            <if test="publisherId != null">
+                #{publisherId},
+            </if>
+            <if test="addressLatitude != null">
+                #{addressLatitude},
+            </if>
+            <if test="addressLongitude != null">
+                #{addressLongitude},
+            </if>
+            <if test="currDiaryPunchCardDayNum != null">
+                #{currDiaryPunchCardDayNum},
+            </if>
+            <if test="punchCardAddress != null and punchCardAddress != ''">
+                #{punchCardAddress},
+            </if>
+            <if test="punchCardTime != null">
+                #{punchCardTime},
+            </if>
+            <if test="textContent != null and textContent != ''">
+                #{textContent},
+            </if>
+            <if test="visibleType != null">
+                #{visibleType},
+            </if>
+            <if test="isRepairDiary != null">
+                #{isRepairDiary},
+            </if>
+        </trim>
+    </insert>
 </mapper>

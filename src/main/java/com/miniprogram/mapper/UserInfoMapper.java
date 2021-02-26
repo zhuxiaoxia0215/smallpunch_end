@@ -29,4 +29,6 @@ public interface UserInfoMapper {
     Map selectAdmirerById(Integer id);
 
     Map selectUserById (Integer userId);
+
+    Map selectAdmirerNameById(Integer id);
 }

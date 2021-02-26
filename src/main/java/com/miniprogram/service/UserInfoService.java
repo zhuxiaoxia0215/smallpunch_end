@@ -23,4 +23,8 @@ public interface UserInfoService {
     Map selectReviewerByDiaryId(Integer diaryId);
 
     Map selectAdmirerById (Integer admirerId);
+
+    Map selectAdmirerNameById (Integer admierId);
+
+    Map selectUserById (Integer userId);
 }

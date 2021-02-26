@@ -20,4 +20,6 @@ public interface LikeMapper {
     List<Map> selectLikeByDiaryId (Integer diaryId);
 
     Map<String,Object> selectLikeRecore(Integer diaryId,Integer userId);
+
+    int addLikeRecord (Like like);
 }

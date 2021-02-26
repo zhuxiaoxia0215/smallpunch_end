@@ -21,5 +21,40 @@
         where diary_id=#{diaryId} and admirer_id=#{userId}
     </select>
 
+    <insert id="addLikeRecord" parameterType="com.miniprogram.entity.Like">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into like_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="likedUserId != null">
+                liked_user_id,
+            </if>
+            <if test="diaryId != null">
+                diary_id,
+            </if>
+            <if test="admirerId != null">
+                admirer_id,
+            </if>
+            <if test="isRead != null">
+                is_read,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="likedUserId != null">
+                #{likedUserId},
+            </if>
+            <if test="diaryId != null">
+                #{diaryId},
+            </if>
+            <if test="admirerId != null">
+                #{admirerId},
+            </if>
+            <if test="isRead != null">
+                #{isRead},
+            </if>
+        </trim>
+    </insert>
+
 
 </mapper>

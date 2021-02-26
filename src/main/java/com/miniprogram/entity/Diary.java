@@ -24,11 +24,11 @@ public class Diary implements Serializable {
     /**
      * 纬度
      */
-    private double addressLatitude;
+    private Double addressLatitude;
     /**
      * 经度
      */
-    private double addressLongitude;
+    private Double addressLongitude;
     /**
      * 打卡天数
      */
@@ -53,6 +53,27 @@ public class Diary implements Serializable {
      * 是否为补卡 0.否 1.是
      */
     private Integer isRepairDiary;
+
+    public void setAddressLatitude(Double addressLatitude) {
+        this.addressLatitude = addressLatitude;
+    }
+
+    public void setAddressLongitude(Double addressLongitude) {
+        this.addressLongitude = addressLongitude;
+    }
+
+    public Integer getIsSticky() {
+        return isSticky;
+    }
+
+    public void setIsSticky(Integer isSticky) {
+        this.isSticky = isSticky;
+    }
+
+    /**
+     * 是否置顶 0.否 1.是
+     */
+    private Integer isSticky;
 
 
     public Integer getId() {

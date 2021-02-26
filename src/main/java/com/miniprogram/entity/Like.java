@@ -17,8 +17,13 @@ public class Like implements Serializable {
      */
     private Integer diaryId;
     /**
+     * 被点赞者id
+     */
+    private Integer likedUserId;
+    /**
      * 点赞者id
      */
+
     private Integer admirerId;
     /**
      * 是否已读 0.未读 1.已读
@@ -58,4 +63,11 @@ public class Like implements Serializable {
         this.isRead = isRead;
     }
 
+    public Integer getLikedUserId() {
+        return likedUserId;
+    }
+
+    public void setLikedUserId(Integer likedUserId) {
+        this.likedUserId = likedUserId;
+    }
 }

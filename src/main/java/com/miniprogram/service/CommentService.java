@@ -1,5 +1,7 @@
 package com.miniprogram.service;
 
+import com.miniprogram.entity.Comment;
+
 import java.util.List;
 import java.util.Map;
 
@@ -12,5 +14,11 @@ import java.util.Map;
 public interface CommentService {
 
     List getDiaryComment (Integer diaryId);
+
+    int addComment(Comment comment);
+
+    Map selectCommentById (Integer commentId);
+
+    int deleteCommentById (Integer commentId);
 
 }

@@ -7,16 +7,20 @@ import java.util.Date;
  * (Comment)实体类
  *
  * @author zhuxiaoxia
- * @since 2021-02-01 11:17:32
+ * @since 2021-02-26 10:23:53
  */
 public class Comment implements Serializable {
-    private static final long serialVersionUID = -69307415093984380L;
+    private static final long serialVersionUID = 704973261821110953L;
 
     private Integer id;
     /**
      * 日记id
      */
     private Integer diaryId;
+    /**
+     * 被评论者id
+     */
+    private Integer respondentId;
     /**
      * 评论者id
      */
@@ -57,6 +61,14 @@ public class Comment implements Serializable {
 
     public void setDiaryId(Integer diaryId) {
         this.diaryId = diaryId;
+    }
+
+    public Integer getRespondentId() {
+        return respondentId;
+    }
+
+    public void setRespondentId(Integer respondentId) {
+        this.respondentId = respondentId;
     }
 
     public Integer getReviewer() {

@@ -1,5 +1,6 @@
 package com.miniprogram.mapper;
 
+import com.miniprogram.entity.Diary;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,4 +20,8 @@ public interface DiaryMapper {
     Map getPunchCardNumByProjectId (Integer projectId);
 
     List<Map> selectDiaryByProject (Integer ProjectId);
+
+    int addPunchCardDiary(Diary diary);
+
+    int setSticky(Integer diaryId, Integer haveSticky);
 }

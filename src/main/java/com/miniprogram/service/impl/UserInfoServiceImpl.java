@@ -50,5 +50,14 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoMapper.selectAdmirerById(admirerId);
     }
 
+    @Override
+    public Map selectAdmirerNameById(Integer admirerId) {
+        return userInfoMapper.selectAdmirerNameById(admirerId);
+    }
+
+    @Override
+    public Map selectUserById(Integer userId){
+        return userInfoMapper.selectUserById(userId);
+    }
 
 }

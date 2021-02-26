@@ -1,5 +1,6 @@
 package com.miniprogram.mapper;
 
+import com.miniprogram.entity.Comment;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,4 +17,9 @@ public interface CommentMapper {
 
     List<Map> selectByDiaryId (Integer diaryId);
 
+    int addComment(Comment comment);
+
+    Map selectCommentById (Integer commentId);
+
+    int deleteCommentById(Integer commentId);
 }

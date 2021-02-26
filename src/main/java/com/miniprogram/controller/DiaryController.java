@@ -3,6 +3,7 @@ package com.miniprogram.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.miniprogram.entity.Diary;
 import com.miniprogram.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @RequestMapping("/index/punchCardDiary")
@@ -112,5 +111,121 @@ public class DiaryController {
             outerMap.put("errMsg",e.getMessage());
         }
         return outerMap;
+    }
+
+    /**
+     *@Description: todo中
+     *@Param:
+     *@return:
+     *@Author: zhuxiaoxia
+     */
+    @PostMapping("/getDiaryListByProjectId")
+    public Map getDiaryListByProjectId(@RequestBody Map<String,Object> json,HttpServletRequest request){
+
+        Map<String,Object> rtnMap = new HashMap<>();
+        try{
+            int PageNo=(Integer) json.get("pageNo");
+            int dataNum= (Integer) json.get("dataNum");
+            int isCreator = (Integer) json.get("isCreator");
+            Integer userId = (Integer) json.get("userId");
+            Integer projectId = (Integer) json.get("projectId");
+
+            List<Map> diaryList = diaryService.selectDiaryByProject(projectId);
+            for( Map diary : diaryList){
+                Integer diaryId = (Integer) diary.get("id");
+                List<Map> commentList=commentService.getDiaryComment(diaryId);
+                List<Map> diaryResourceList=diaryResourceService.getDiaryResource(diaryId);
+                List<Map> likeList=likeService.getLikeInfo(diaryId);
+                List<Map> tenLikeInfo =likeService.getTenLikeInfo(diaryId);
+
+                diary.put("allCommentInfo",commentList);
+                diary.put("diaryResource",diaryResourceList);
+                diary.put("publisher",userInfoService.selectRespondentByDiaryId(diaryId));
+                diary.put("like_user_num",likeList.size());
+                diary.put("comment_num",commentList.size());
+
+
+//
+//                diaryMap.put("allLikeInfo",likeList);
+//
+//
+//
+//
+//                //diaryMap.put("existAttendProject",attendUserService.existAttendProject(vistorId,projectId));
+//               // diaryMap.putAll(likeService.selectLikeRecore(vistorId,diaryId));
+                //rtnMap.put("data",diaryMap);
+                rtnMap.put("sucMsg","获取日记详情成功");
+            }
+        }catch (Exception e){
+            rtnMap.put("errMsg",e.getMessage());
+        }
+        return rtnMap;
+    }
+
+    @PostMapping("/addPunchCardDiary")
+    public Map addPunchCardDiary(@RequestBody Map<String,Object> json,HttpServletRequest request){
+        Map rtnMap = new HashMap();
+        try{
+            Diary diary = new Diary();
+
+            if(json.get("address_latitude") != null){
+                diary.setAddressLatitude((Double) json.get("address_latitude"));
+            }
+            if(json.get("address_longitude") != null){
+                diary.setAddressLongitude((Double) json.get("address_longitude"));
+            }
+            diary.setIsRepairDiary((Integer) json.get("is_repair_diary"));
+            diary.setProjectId((Integer) json.get("project_id"));
+            diary.setPunchCardAddress((String) json.get("punch_card_address"));
+            diary.setTextContent((String) json.get("text_content" ));
+            diary.setPublisherId((Integer) json.get("user_id"));
+            diary.setVisibleType((Integer) json.get("visible_type"));
+            diary.setPunchCardTime(new Date());
+
+            diaryService.addPunchCardDiary(diary);
+            Map data = new HashMap();
+            data.put("diaryId",diary.getId());
+            rtnMap.put("data",data);
+            rtnMap.put("sucMsg","发表日记成功");
+        }catch(Exception e){
+            rtnMap.put("errMsg","发表日记成功失败");
+        }
+        return  rtnMap;
+    }
+
+    @PostMapping("/deleteDiaryById")
+    public Map deleteDiaryById (@RequestBody Map<String,Object> json,HttpServletRequest request){
+        /**
+        *@Description: todo中
+        *@Param: [json, request]
+        *@return: java.util.Map
+        *@Author: zhuxiaoxia
+        */
+        Map rtnMap = new HashMap();
+        try {
+
+
+        }catch (Exception e){
+
+        }
+        return rtnMap;
+    }
+
+    @PostMapping("/dealDiarySticky")
+    public Map dealDiarySticky(@RequestBody Map<String,Object> json,HttpServletRequest request){
+        Map rtnMap = new HashMap();
+        try{
+            Integer diaryId = (Integer) json.get("diaryId");
+            Integer haveSticky = (Integer) json.get("haveSticky");
+
+            int result = diaryService.setSticky(diaryId,haveSticky);
+            if (result > 0){
+                rtnMap.put("data","");
+                rtnMap.put("sucMsg","置顶成功");
+            }
+        }catch(Exception e){
+            rtnMap.put("errMsg","置顶失败");
+        }
+        return rtnMap;
     }
 }

@@ -1,5 +1,6 @@
 package com.miniprogram.service.impl;
 
+import com.miniprogram.entity.Diary;
 import com.miniprogram.mapper.DiaryMapper;
 import com.miniprogram.service.DiaryService;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,16 @@ public class DiaryServiceImpl implements DiaryService {
     public List selectDiaryByProject(Integer projectId) {
 
         return diaryMapper.selectDiaryByProject(projectId);
+    }
+
+    @Override
+    public int addPunchCardDiary(Diary diary) {
+        return diaryMapper.addPunchCardDiary(diary);
+    }
+
+    @Override
+    public int setSticky(Integer diaryId, Integer haveSticky) {
+        return diaryMapper.setSticky(diaryId,haveSticky);
     }
 
 

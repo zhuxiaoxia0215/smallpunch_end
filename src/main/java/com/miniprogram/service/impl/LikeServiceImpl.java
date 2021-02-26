@@ -53,4 +53,23 @@ public class LikeServiceImpl implements LikeService {
         }
         return map;
     }
+
+    @Override
+    public List getTenLikeInfo(Integer diaryId) {
+        List<Map> likeInfos= likeMapper.selectLikeByDiaryId(diaryId);
+        List<Map> allLikeInfo = new ArrayList<>();
+        for(Map<String,Object> likeInfo:likeInfos){
+            Integer admirerId = (Integer) likeInfo.get("admirer_id");
+            Map admirerMap = userInfoService.selectAdmirerNameById(admirerId);
+            likeInfo.remove("admirer_id");
+            likeInfo.put("admirer",admirerMap);
+            allLikeInfo.add(likeInfo);
+        }
+        return allLikeInfo;
+    }
+
+    @Override
+    public int addLikeRecord(Like like) {
+        return likeMapper.addLikeRecord(like);
+    }
 }
