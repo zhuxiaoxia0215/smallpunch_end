@@ -34,10 +34,11 @@ public class UserController {
    * 根据code换取openid和session_key
    */
     @GetMapping("/user/getOpenId")
-    public String getOpenId(HttpServletRequest request, @RequestParam("code") String code) throws IOException {
+    public Map getOpenId(HttpServletRequest request, @RequestParam("code") String code) throws IOException {
         String appID = "wxf2f99291359f6aa8";
         String appSecret = "ec8966fbefb0b13ed7f4ed32672c99c0";
         String result = "";
+        Map rtnMap = new HashMap();
         try {//请求微信服务器，用code换取openid。HttpUtil是工具类，后面会给出实现，Configure类是小程序配置信息，后面会给出代码
             String urlPath = "https://api.weixin.qq.com/sns/jscode2session?appid="
                     + appID + "&secret="
@@ -48,12 +49,15 @@ public class UserController {
             ObjectMapper mapper = new ObjectMapper();
             OpenIdJson openIdJson = mapper.readValue(result, OpenIdJson.class);
             System.out.println(result.toString());
-            System.out.println(openIdJson.getOpenid());
-            return result;
+            System.out.println();
+            Map data = new HashMap();
+            data.put("openid",openIdJson.getOpenid());
+            rtnMap.put("openid",openIdJson.getOpenid());
+            rtnMap.put("sucMsg","获取openid成功");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return result;
+        return rtnMap;
     }
 
 
@@ -69,7 +73,7 @@ public class UserController {
                                     @RequestParam("sex") String sex){
         Map map=new HashMap<String, Object>();
         try{
-            UserInfo userInfo = userInfoService.addUserInfo(openId,nickName,avatarUrl,sex);
+            Map userInfo = userInfoService.addUserInfo(openId,nickName,avatarUrl,sex);
             map.put("userInfo", userInfo);
             return map;
         }catch(Exception e){
@@ -120,6 +124,32 @@ public class UserController {
         return rtnMap;
     }
 
+    @PostMapping("/User/getUserPunchCardDiaryList")
+    public Map getUserPunchCardDiaryList(HttpServletRequest request,@RequestBody Map<String, Object> json){
+        Map rtnMap = new HashMap();
+        try{
 
+            Map data = new HashMap();
+            rtnMap.put("data",data);
+            rtnMap.put("sucMsg","");
+        }catch (Exception e){
+            rtnMap.put("errMsg",e.getMessage());
+        }
+        return rtnMap;
+    }
+
+    @PostMapping("/User/getUserPunchCardProjectListByType")
+    public Map getUserPunchCardProjectListByType(HttpServletRequest request,@RequestBody Map<String, Object> json){
+        Map rtnMap = new HashMap();
+        try{
+
+            Map data = new HashMap();
+            rtnMap.put("data",data);
+            rtnMap.put("sucMsg","");
+        }catch (Exception e){
+            rtnMap.put("errMsg",e.getMessage());
+        }
+        return rtnMap;
+    }
 
 }

@@ -54,6 +54,19 @@ public class Diary implements Serializable {
      */
     private Integer isRepairDiary;
 
+    public Integer getHaveSticky() {
+        return haveSticky;
+    }
+
+    public void setHaveSticky(Integer haveSticky) {
+        this.haveSticky = haveSticky;
+    }
+
+    /**
+     * 是否置顶 0.否 1.是
+     */
+    private Integer haveSticky;
+
     public void setAddressLatitude(Double addressLatitude) {
         this.addressLatitude = addressLatitude;
     }

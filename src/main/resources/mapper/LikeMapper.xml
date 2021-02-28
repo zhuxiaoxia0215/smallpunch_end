@@ -13,6 +13,7 @@
         select id,admirer_id
         from like_info
         where diary_id=#{diaryId}
+        limit 10
     </select>
     
     <select id="selectLikeRecore" resultType="java.util.HashMap">

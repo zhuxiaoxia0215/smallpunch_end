@@ -38,12 +38,18 @@ public class CommentServiceImpl implements CommentService {
         List<Map> commentList=commentMapper.selectByDiaryId(diaryId);
         List<Map> commentWithUserList = new ArrayList<>();
         for(Map<String,Object> comment:commentList){
-            Integer diaId = (Integer) comment.get("diary_id");
-            Integer commentId = (Integer)comment.get("id");
-            Map respondent = userInfoService.selectRespondentByDiaryId(diaId);
-            Map reviewer=userInfoService.selectReviewerByDiaryId(commentId);
+            Map respondent=userInfoService.selectUserById((Integer) comment.get("respondent_id"));
+            Map reviewer = userInfoService.selectUserById((Integer) comment.get("reviewer"));
+            comment.remove("respondent_id");
+            comment.remove("reviewer");
             comment.put("respondent",respondent);
             comment.put("reviewer",reviewer);
+//            Integer diaId = (Integer) comment.get("diary_id");
+//            Integer commentId = (Integer)comment.get("id");
+//            Map respondent = userInfoService.selectById();
+//            Map reviewer=userInfoService.selectReviewerByDiaryId(commentId);
+//            comment.put("respondent",respondent);
+//            comment.put("reviewer",reviewer);
             commentWithUserList.add(comment);
         }
         return commentWithUserList;

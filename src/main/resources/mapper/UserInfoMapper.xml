@@ -26,7 +26,7 @@
         avatar_url
     </sql>
 
-    <select id="selectByOpenId" resultMap="UserInfoMap">
+    <select id="selectByOpenId" resultType="java.util.HashMap">
         select <include refid="Base_Column_List"/>
         from user_info
         where open_id=#{openId}

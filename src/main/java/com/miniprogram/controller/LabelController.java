@@ -2,22 +2,20 @@ package com.miniprogram.controller;
 
 import com.miniprogram.service.LabelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/Admin/ProjectTypeLabelManage")
+//@RequestMapping("/Admin/ProjectTypeLabelManage")
 public class LabelController {
 
     @Autowired
     private LabelService labelService;
 
-    @GetMapping("/getAllTypeLabel")
+    @GetMapping("/Admin/ProjectTypeLabelManage/getAllTypeLabel")
     public Map getAllTypeLabel(HttpServletRequest request){
         Map outerMap = new HashMap();
         try{
@@ -30,4 +28,19 @@ public class LabelController {
             return outerMap;
         }
     }
+
+    @PostMapping("/index/ProjectTypeLabel/getChildrenLabel")
+    public Map getChildrenLabel(HttpServletRequest request,@RequestBody Map<String, Object> json){
+        Map rtnMap = new HashMap();
+        try{
+
+            Map data = new HashMap();
+            rtnMap.put("data",data);
+            rtnMap.put("sucMsg","");
+        }catch (Exception e){
+            rtnMap.put("errMsg",e.getMessage());
+        }
+        return rtnMap;
+    }
+
 }

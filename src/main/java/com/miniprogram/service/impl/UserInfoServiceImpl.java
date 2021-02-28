@@ -20,9 +20,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserInfoMapper userInfoMapper;
 
     @Override
-    public UserInfo addUserInfo(String openId, String nickName, String avatarUrl, String sex) {
+    public Map addUserInfo(String openId, String nickName, String avatarUrl, String sex) {
 
-        UserInfo userInfo=userInfoMapper.selectByOpenId(openId);
+        Map userInfo=userInfoMapper.selectByOpenId(openId);
         if(userInfo == null){
             int insert = userInfoMapper.insert(openId,nickName,avatarUrl,sex);
             userInfo = userInfoMapper.selectByOpenId(openId);

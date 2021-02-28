@@ -131,6 +131,7 @@ public class DiaryController {
             Integer projectId = (Integer) json.get("projectId");
 
             List<Map> diaryList = diaryService.selectDiaryByProject(projectId);
+            List<Map> data = new LinkedList<>();
             for( Map diary : diaryList){
                 Integer diaryId = (Integer) diary.get("id");
                 List<Map> commentList=commentService.getDiaryComment(diaryId);
@@ -143,19 +144,12 @@ public class DiaryController {
                 diary.put("publisher",userInfoService.selectRespondentByDiaryId(diaryId));
                 diary.put("like_user_num",likeList.size());
                 diary.put("comment_num",commentList.size());
-
-
-//
-//                diaryMap.put("allLikeInfo",likeList);
-//
-//
-//
-//
-//                //diaryMap.put("existAttendProject",attendUserService.existAttendProject(vistorId,projectId));
-//               // diaryMap.putAll(likeService.selectLikeRecore(vistorId,diaryId));
-                //rtnMap.put("data",diaryMap);
-                rtnMap.put("sucMsg","获取日记详情成功");
+                diary.put("tenLikeInfo",tenLikeInfo);
+                diary.putAll(likeService.selectLikeRecore(userId,diaryId));
+                data.add(diary);
             }
+            rtnMap.put("data",data);
+            rtnMap.put("sucMsg","获取日记详情成功");
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
         }

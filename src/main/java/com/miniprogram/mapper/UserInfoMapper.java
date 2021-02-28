@@ -16,7 +16,7 @@ import java.util.Map;
 @Mapper
 public interface UserInfoMapper {
 
-    UserInfo selectByOpenId (String open_id);
+    Map selectByOpenId (String open_id);
 
     int insert (String openId,String nickName,String avatarUrl,String sex);
 

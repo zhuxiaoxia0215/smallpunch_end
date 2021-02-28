@@ -78,13 +78,13 @@
     </delete>
 
     <select id="selectByDiaryId" resultType="java.util.HashMap">
-        select id,diary_id,text_comment,sound_comment,pid,create_time
+        select id,diary_id,respondent_id,reviewer,text_comment,sound_comment,pid,create_time
         from comment
         where diary_id=#{diaryId}
     </select>
     
     <select id="selectCommentById" resultType="java.util.HashMap">
-        select id,diary_id,respondent_id,reviewer,text_comment,sound_comment,create_time,pid,is_read
+        select id,diary_id,respondent_id,reviewer,text_comment,sound_comment,create_time,pid
         from comment
         where id=#{commentId}
     </select>

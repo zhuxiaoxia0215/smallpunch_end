@@ -14,7 +14,7 @@ import java.util.Map;
 
 public interface UserInfoService {
 
-    UserInfo addUserInfo(String openId,String nickName,String avatarUrl,String sex);
+    Map addUserInfo(String openId,String nickName,String avatarUrl,String sex);
 
     Map selectById(Integer userId);
 
