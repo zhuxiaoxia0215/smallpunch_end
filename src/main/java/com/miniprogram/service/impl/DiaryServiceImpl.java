@@ -47,5 +47,15 @@ public class DiaryServiceImpl implements DiaryService {
         return diaryMapper.setSticky(diaryId,haveSticky);
     }
 
+    @Override
+    public List<Map> selectDiaryByUserIdAll(Integer userId) {
+        return diaryMapper.selectDiaryByUserIdAll(userId);
+    }
+
+    @Override
+    public List<Map> selectDiaryByUserIdVisible(Integer userId) {
+        return diaryMapper.selectDiaryByUserIdVisible(userId);
+    }
+
 
 }

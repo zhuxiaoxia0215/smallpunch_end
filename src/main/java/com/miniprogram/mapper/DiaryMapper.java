@@ -24,4 +24,8 @@ public interface DiaryMapper {
     int addPunchCardDiary(Diary diary);
 
     int setSticky(Integer diaryId, Integer haveSticky);
+
+    List<Map> selectDiaryByUserIdAll(Integer userId);
+
+    List<Map> selectDiaryByUserIdVisible(Integer userId);
 }

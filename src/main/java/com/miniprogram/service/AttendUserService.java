@@ -1,5 +1,7 @@
 package com.miniprogram.service;
 
+import com.miniprogram.entity.AttendUser;
+
 import java.util.List;
 import java.util.Map;
 
@@ -20,4 +22,6 @@ public interface AttendUserService {
     List<Map> getAttendUser (Integer projectId);
 
     Map<String,Integer> getAttendId (Integer userId, Integer projectId);
+
+    int joinInProject(AttendUser attendUser);
 }

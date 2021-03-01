@@ -1,5 +1,6 @@
 package com.miniprogram.service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,4 +13,5 @@ public interface LabelService {
 
     Map getAllTypeLabel ( );
 
+    List<Map> getChildrenLable(String parentLabelName);
 }

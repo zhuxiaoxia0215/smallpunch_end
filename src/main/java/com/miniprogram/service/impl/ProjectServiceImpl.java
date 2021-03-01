@@ -66,5 +66,15 @@ public class ProjectServiceImpl implements ProjectService {
         return projectMapper.getProjectInfoById(projectId);
     }
 
+    @Override
+    public int updateCreatorIntr(Integer projectId, String introduce) {
+        return projectMapper.updateCreatorIntr(projectId,introduce);
+    }
+
+    @Override
+    public int updateWeiXinNum(Integer projectId, String weixinNum) {
+        return projectMapper.updateWeixinNum(projectId,weixinNum);
+    }
+
 
 }

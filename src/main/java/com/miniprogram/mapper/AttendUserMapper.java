@@ -1,5 +1,6 @@
 package com.miniprogram.mapper;
 
+import com.miniprogram.entity.AttendUser;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface AttendUserMapper {
     List<Map<String,String>> getRecentAttendUser(Integer projectId);
 
     List<Map> getAttendUser (Integer projectId);
+
+    int joinInProject(AttendUser attendUser);
 }

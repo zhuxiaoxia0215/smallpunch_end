@@ -20,4 +20,6 @@ public interface LikeService {
     List getTenLikeInfo(Integer diaryId);
 
     int addLikeRecord (Like like);
+
+    int deleteLikeRecord(Integer likeRecordId);
 }

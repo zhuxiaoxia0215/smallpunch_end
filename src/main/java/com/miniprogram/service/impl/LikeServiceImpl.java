@@ -72,4 +72,9 @@ public class LikeServiceImpl implements LikeService {
     public int addLikeRecord(Like like) {
         return likeMapper.addLikeRecord(like);
     }
+
+    @Override
+    public int deleteLikeRecord(Integer likeRecordId) {
+        return likeMapper.deleteLikeRecore(likeRecordId);
+    }
 }

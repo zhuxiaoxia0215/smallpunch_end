@@ -19,4 +19,5 @@ public interface LabelMapper {
 
     List<Map> selectAllChildLabel ( );
 
+    List<Map> selectChildLabel(String parentLabelName);
 }

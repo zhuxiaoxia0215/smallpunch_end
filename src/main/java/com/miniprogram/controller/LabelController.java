@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -33,10 +34,10 @@ public class LabelController {
     public Map getChildrenLabel(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
         try{
-
-            Map data = new HashMap();
+            String parentLabelName = (String) json.get("parentLabelName");
+            List<Map> data = labelService.getChildrenLable(parentLabelName);
             rtnMap.put("data",data);
-            rtnMap.put("sucMsg","");
+            rtnMap.put("sucMsg",String.format("获取%s类型的子标签成功",parentLabelName));
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
         }

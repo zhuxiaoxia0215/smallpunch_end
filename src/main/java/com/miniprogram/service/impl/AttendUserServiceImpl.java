@@ -1,5 +1,6 @@
 package com.miniprogram.service.impl;
 
+import com.miniprogram.entity.AttendUser;
 import com.miniprogram.mapper.AttendUserMapper;
 import com.miniprogram.mapper.UserInfoMapper;
 import com.miniprogram.service.AttendUserService;
@@ -64,6 +65,11 @@ public class AttendUserServiceImpl implements AttendUserService {
     @Override
     public Map<String, Integer> getAttendId(Integer userId, Integer projectId) {
         return attendUserMapper.attendId(userId,projectId);
+    }
+
+    @Override
+    public int joinInProject(AttendUser attendUser) {
+        return attendUserMapper.joinInProject(attendUser);
     }
 
 }

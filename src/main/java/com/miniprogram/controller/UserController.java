@@ -5,17 +5,18 @@ import com.miniprogram.bean.OutputObject;
 import com.miniprogram.entity.Project;
 import com.miniprogram.entity.UserInfo;
 import com.miniprogram.entity.OpenIdJson;
-import com.miniprogram.service.AttendUserService;
-import com.miniprogram.service.ProjectService;
-import com.miniprogram.service.UserInfoService;
+import com.miniprogram.mapper.ProjectMapper;
+import com.miniprogram.service.*;
 import com.miniprogram.utils.HttpUtil;
 import com.miniprogram.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,16 @@ public class UserController {
     private ProjectService projectService;
     @Autowired
     private AttendUserService attendUserService;
+    @Autowired
+    private DiaryService diaryService;
+    @Autowired
+    private CommentService commentService;
+    @Autowired
+    private DiaryResourceService diaryResourceService;
+    @Autowired
+    private LikeService likeService;
+    @Resource
+    private ProjectMapper projectMapper;
 
  /**
    * 根据code换取openid和session_key
@@ -128,8 +139,37 @@ public class UserController {
     public Map getUserPunchCardDiaryList(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
         try{
+            int dataNum = (int) json.get("dataNum");
+            int pageNo =(int) json.get("pageNo");
+            int isDiaryCreator = (int) json.get("isDiaryCreator");
+            Integer visitedUserId = (Integer) json.get("visitedUserId");
+            Integer visitorUserId = (Integer) json.get("visitorUserId");
 
-            Map data = new HashMap();
+            List<Map> diaryList = new LinkedList<>();
+            if(isDiaryCreator == 1){
+                diaryList = diaryService.selectDiaryByUserIdAll(visitedUserId);
+            }else {
+                diaryList = diaryService.selectDiaryByUserIdVisible(visitedUserId);
+            }
+            List<Map> data = new LinkedList<>();
+            for( Map diary : diaryList){
+                Integer diaryId = (Integer) diary.get("id");
+                List<Map> commentList=commentService.getDiaryComment(diaryId);
+                List<Map> diaryResourceList=diaryResourceService.getDiaryResource(diaryId);
+                List<Map> likeList=likeService.getLikeInfo(diaryId);
+                List<Map> tenLikeInfo =likeService.getTenLikeInfo(diaryId);
+
+                diary.put("allCommentInfo",commentList);
+                diary.put("diaryResource",diaryResourceList);
+                diary.put("publisher",userInfoService.selectRespondentByDiaryId(diaryId));
+                diary.put("like_user_num",likeList.size());
+                diary.put("comment_num",commentList.size());
+                diary.put("tenLikeInfo",tenLikeInfo);
+                diary.put("punchCardProject", projectMapper.selectProjectByDiaryId(diaryId));
+                diary.putAll(likeService.selectLikeRecore(visitorUserId,diaryId));
+                data.add(diary);
+            }
+
             rtnMap.put("data",data);
             rtnMap.put("sucMsg","");
         }catch (Exception e){
@@ -138,6 +178,12 @@ public class UserController {
         return rtnMap;
     }
 
+    /**
+    *@Description: todo中
+    *@Param: 
+    *@return: 
+    *@Author: zhuxiaoxia
+    */
     @PostMapping("/User/getUserPunchCardProjectListByType")
     public Map getUserPunchCardProjectListByType(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();

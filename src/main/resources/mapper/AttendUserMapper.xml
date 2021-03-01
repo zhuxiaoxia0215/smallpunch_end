@@ -28,4 +28,35 @@
         where project_id= #{project_Id}
     </select>
 
+    <insert id="joinInProject" parameterType="com.miniprogram.entity.AttendUser">
+        insert into attend_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="isCreator != null">
+                is_creator,
+            </if>
+            <if test="attendTime != null">
+                attend_time,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                #{projectId},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="isCreator != null">
+                #{isCreator},
+            </if>
+            <if test="attendTime != null">
+                #{attendTime},
+            </if>
+        </trim>
+    </insert>
 </mapper>

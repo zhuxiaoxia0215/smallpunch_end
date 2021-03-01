@@ -117,4 +117,18 @@
             </if>
         </trim>
     </insert>
+
+    <select id="selectDiaryByUserIdAll" resultType="java.util.Map">
+        select  diary.id,address_latitude,address_longitude,punch_card_address,punch_card_time,text_content,curr_diary_punch_card_day_num,
+        is_repair_diary,have_sticky,visible_type
+        from diary
+        where diary.publisher_id = #{userId}
+    </select>
+
+    <select id="selectDiaryByUserIdVisible" resultType="java.util.HashMap">
+        select  diary.id,address_latitude,address_longitude,punch_card_address,punch_card_time,text_content,curr_diary_punch_card_day_num,
+        is_repair_diary,have_sticky,visible_type
+        from diary
+        where diary.publisher_id = #{userId} and visible_type = 1
+    </select>
 </mapper>

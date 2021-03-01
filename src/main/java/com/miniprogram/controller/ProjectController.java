@@ -1,5 +1,6 @@
 package com.miniprogram.controller;
 
+import com.miniprogram.entity.AttendUser;
 import com.miniprogram.entity.Project;
 import com.miniprogram.entity.ProjectLabel;
 import com.miniprogram.mapper.ProjectLabelMapper;
@@ -7,10 +8,13 @@ import com.miniprogram.service.AttendUserService;
 import com.miniprogram.service.ProjectIntroduceService;
 import com.miniprogram.service.ProjectLabelService;
 import com.miniprogram.service.ProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.DatabaseMetaData;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +56,14 @@ public class ProjectController {
 
             projectService.createProject(project);
             Integer projectId =project.getId();
+
+            AttendUser attendUser = new AttendUser();
+            attendUser.setProjectId(projectId);
+            attendUser.setUserId(creatorId);
+            attendUser.setIsCreator(1);
+            attendUser.setAttendTime(new Date());
+
+            attendUserService.joinInProject(attendUser);
 
             ProjectLabel projectLabel =new ProjectLabel();
             projectLabel.setProjectId(projectId);
@@ -114,6 +126,12 @@ public class ProjectController {
         return rtnMap;
     }
 
+    /**
+    *@Description: todo中
+    *@Param: 
+    *@return: 
+    *@Author: zhuxiaoxia
+    */
     @PostMapping("/getCreatorInfo")
     public Map getCreatorInfo(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
@@ -128,6 +146,12 @@ public class ProjectController {
         return rtnMap;
     }
 
+    /**
+    *@Description: todo中
+    *@Param: 
+    *@return: 
+    *@Author: zhuxiaoxia
+    */
     @PostMapping("/getProjectIntr")
     public Map getProjectIntr(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
@@ -146,10 +170,20 @@ public class ProjectController {
     public Map joinInProject(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
         try{
+            Integer projectId = (Integer) json.get("project_id");
+            Integer userId = (Integer) json.get("user_id");
 
-            Map data = new HashMap();
-            rtnMap.put("data",data);
-            rtnMap.put("sucMsg","");
+            AttendUser attendUser = new AttendUser();
+            attendUser.setProjectId(projectId);
+            attendUser.setUserId(userId);
+            attendUser.setIsCreator(0);
+            attendUser.setAttendTime(new Date());
+
+            if(attendUserService.joinInProject(attendUser) != 0){
+                rtnMap.put("data","");
+                rtnMap.put("sucMsg","加入打卡圈子成功");
+            }
+
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
         }
@@ -160,20 +194,37 @@ public class ProjectController {
     public Map updateCreatorInfo(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
         try{
+            String introduce = (String) json.get("creator_introduce");
+            String weixinNum = (String) json.get("weixin_num");
+            Integer projectId = (Integer) json.get("project_id");
 
-            Map data = new HashMap();
-            rtnMap.put("data",data);
-            rtnMap.put("sucMsg","");
+            projectService.updateCreatorIntr(projectId,introduce);
+            projectService.updateWeiXinNum(projectId,weixinNum);
+            if(projectService.updateCreatorIntr(projectId,introduce) != 0 &&
+                projectService.updateWeiXinNum(projectId,weixinNum) !=0) {
+
+                rtnMap.put("data", "");
+                rtnMap.put("sucMsg", "修改成功");
+            }
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
         }
         return rtnMap;
     }
+
+    /**
+    *@Description: todo中
+    *@Param: 
+    *@return: 
+    *@Author: zhuxiaoxia
+    */
 
     @PostMapping("/updateProjectIntr")
     public Map updateProjectIntr(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
         try{
+            List<Map> projectIntrInfo = (List<Map>) json.get("projectIntrInfo");
+
 
             Map data = new HashMap();
             rtnMap.put("data",data);
@@ -184,6 +235,12 @@ public class ProjectController {
         return rtnMap;
     }
 
+    /**
+    *@Description: todo中
+    *@Param: 
+    *@return: 
+    *@Author: zhuxiaoxia
+    */
     @PostMapping("/search")
     public Map search(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();

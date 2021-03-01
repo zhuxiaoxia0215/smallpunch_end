@@ -22,4 +22,8 @@ public interface DiaryService {
     int addPunchCardDiary(Diary diary);
 
     int setSticky(Integer diaryId, Integer haveSticky);
+
+    List<Map> selectDiaryByUserIdAll(Integer visitedUserId);
+
+    List<Map> selectDiaryByUserIdVisible(Integer visitedUserId);
 }

@@ -30,4 +30,9 @@ public class LabelServiceImpl implements LabelService {
         labelMap.put("childLabel",childLabelList);
         return labelMap;
     }
+
+    @Override
+    public List<Map> getChildrenLable(String parentLabelName) {
+        return labelMapper.selectChildLabel(parentLabelName);
+    }
 }

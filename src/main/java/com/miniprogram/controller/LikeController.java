@@ -37,4 +37,21 @@ public class LikeController {
         }
         return rtnMap;
     }
+
+    @PostMapping("/cancelLike")
+    public Map cancelLike(@RequestBody Map<String,Object> json, HttpServletRequest request){
+        Map rtnMap = new HashMap ();
+        try{
+            Integer diaryId = (Integer) json.get("diaryId");
+            Integer likeRecordId = (Integer) json.get("likeRecordId");
+
+            if(likeService.deleteLikeRecord(likeRecordId)> 0){
+                rtnMap.put("data","");
+                rtnMap.put("sucMsg","取消点赞成功");
+            }
+        }catch (Exception e){
+            rtnMap.put("errMsg",e.getMessage());
+        }
+        return rtnMap;
+    }
 }

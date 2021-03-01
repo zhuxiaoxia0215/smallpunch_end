@@ -69,5 +69,15 @@
         where project.creator_id = user_info.id and project.id=#{projectId}
     </select>
 
+    <update id="updateCreatorIntr" >
+        update project
+        set creator_introduce=#{param2} where id=#{param1}
+    </update>
+
+    <update id="updateWeixinNum">
+        update user_info,project
+        set user_info.weixin_Num = #{param2}
+        where user_info.id=project.creator_id and project.id = #{param1}
+    </update>
 
 </mapper>

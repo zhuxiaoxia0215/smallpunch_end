@@ -57,5 +57,9 @@
         </trim>
     </insert>
 
+    <delete id="deleteLikeRecore" >
+        delete from like_info
+        where id =#{likeRecordId}
+    </delete>
 
 </mapper>

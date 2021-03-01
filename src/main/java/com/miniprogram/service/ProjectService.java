@@ -23,4 +23,7 @@ public interface ProjectService {
 
     Map<String,Object> getProjectInfoById (Integer projectId);
 
+    int updateCreatorIntr(Integer projectId, String introduce);
+
+    int updateWeiXinNum(Integer projectId,String weixinNum);
 }

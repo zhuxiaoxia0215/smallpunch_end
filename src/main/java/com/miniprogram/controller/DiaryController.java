@@ -113,12 +113,6 @@ public class DiaryController {
         return outerMap;
     }
 
-    /**
-     *@Description: todo中
-     *@Param:
-     *@return:
-     *@Author: zhuxiaoxia
-     */
     @PostMapping("/getDiaryListByProjectId")
     public Map getDiaryListByProjectId(@RequestBody Map<String,Object> json,HttpServletRequest request){
 

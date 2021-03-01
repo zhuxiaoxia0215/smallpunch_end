@@ -25,4 +25,9 @@
         where parent_id != 0
     </select>
 
+    <select id="selectChildLabel" resultType="java.util.HashMap">
+        select label.id,label_name
+        from (select id from label where label_name = #{parentLabelName}) as parentLabel, label
+        where parentLabel.id = label. parent_id
+    </select>
 </mapper>

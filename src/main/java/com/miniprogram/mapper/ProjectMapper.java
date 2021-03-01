@@ -23,4 +23,8 @@ public interface ProjectMapper {
     Integer createProject(Project project);
 
     Map<String,Object> getProjectInfoById (Integer project);
+
+    int updateCreatorIntr(Integer projectId, String introduce);
+
+    int updateWeixinNum(Integer projectId,String WeiXinNum);
 }
