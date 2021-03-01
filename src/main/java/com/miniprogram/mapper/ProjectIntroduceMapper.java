@@ -1,5 +1,6 @@
 package com.miniprogram.mapper;
 
+import com.miniprogram.entity.ProjectIntroduce;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,5 +17,5 @@ public interface ProjectIntroduceMapper {
 
     List<Map> getProjectIntr (Integer projectId);
 
-
+    int update(ProjectIntroduce projectIntroduce);
 }

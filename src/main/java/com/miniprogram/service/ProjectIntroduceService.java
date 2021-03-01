@@ -1,5 +1,7 @@
 package com.miniprogram.service;
 
+import com.miniprogram.entity.ProjectIntroduce;
+
 import java.util.List;
 import java.util.Map;
 
@@ -13,4 +15,5 @@ public interface ProjectIntroduceService {
 
     List<Map> getProjectIntr (Integer projectId);
 
+    int update(ProjectIntroduce projectIntroduce);
 }

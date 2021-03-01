@@ -1,6 +1,7 @@
 package com.miniprogram.service.impl;
 
 import com.miniprogram.entity.Project;
+import com.miniprogram.entity.ProjectIntroduce;
 import com.miniprogram.mapper.AttendUserMapper;
 import com.miniprogram.mapper.DiaryMapper;
 import com.miniprogram.mapper.ProjectLabelMapper;
@@ -75,6 +76,5 @@ public class ProjectServiceImpl implements ProjectService {
     public int updateWeiXinNum(Integer projectId, String weixinNum) {
         return projectMapper.updateWeixinNum(projectId,weixinNum);
     }
-
 
 }

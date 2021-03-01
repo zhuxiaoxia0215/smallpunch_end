@@ -2,6 +2,7 @@ package com.miniprogram.controller;
 
 import com.miniprogram.entity.AttendUser;
 import com.miniprogram.entity.Project;
+import com.miniprogram.entity.ProjectIntroduce;
 import com.miniprogram.entity.ProjectLabel;
 import com.miniprogram.mapper.ProjectLabelMapper;
 import com.miniprogram.service.AttendUserService;
@@ -147,7 +148,7 @@ public class ProjectController {
     }
 
     /**
-    *@Description: todo中
+    *@Description:
     *@Param: 
     *@return: 
     *@Author: zhuxiaoxia
@@ -156,10 +157,11 @@ public class ProjectController {
     public Map getProjectIntr(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
         try{
+            Integer projectId =(Integer) json.get("project_id");
+            List<Map> data = projectIntroduceService.getProjectIntr(projectId);
 
-            Map data = new HashMap();
             rtnMap.put("data",data);
-            rtnMap.put("sucMsg","");
+            rtnMap.put("sucMsg","获取圈子介绍成功");
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
         }
@@ -213,7 +215,7 @@ public class ProjectController {
     }
 
     /**
-    *@Description: todo中
+    *@Description:
     *@Param: 
     *@return: 
     *@Author: zhuxiaoxia
@@ -224,11 +226,17 @@ public class ProjectController {
         Map rtnMap = new HashMap();
         try{
             List<Map> projectIntrInfo = (List<Map>) json.get("projectIntrInfo");
+            for(Map projectIntr :projectIntrInfo){
+                ProjectIntroduce projectIntroduce = new ProjectIntroduce();
+                projectIntroduce.setId((Integer) projectIntr.get("id"));
+                projectIntroduce.setContent((String) projectIntr.get("content"));
+                projectIntroduce.setOrder((Integer) projectIntr.get("order"));
+                projectIntroduce.setType((Integer) projectIntr.get("type"));
 
-
-            Map data = new HashMap();
-            rtnMap.put("data",data);
-            rtnMap.put("sucMsg","");
+                projectIntroduceService.update(projectIntroduce);
+            }
+            rtnMap.put("data","");
+            rtnMap.put("sucMsg","更新圈子简介信息成功");
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
         }

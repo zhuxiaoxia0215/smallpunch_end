@@ -1,6 +1,7 @@
 package com.miniprogram.service;
 
 import com.miniprogram.entity.Project;
+import com.miniprogram.entity.ProjectIntroduce;
 
 import java.util.List;
 import java.util.Map;
@@ -26,4 +27,5 @@ public interface ProjectService {
     int updateCreatorIntr(Integer projectId, String introduce);
 
     int updateWeiXinNum(Integer projectId,String weixinNum);
+
 }

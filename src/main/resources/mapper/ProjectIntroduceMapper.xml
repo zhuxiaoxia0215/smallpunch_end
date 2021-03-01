@@ -17,9 +17,25 @@
     </sql>
     
     <select id="getProjectIntr" resultType="HashMap">
-        select id,content,type,"order"
+        select id,content,type,"order",project_id
         from project_introduce
         where project_id=#{projectId}
     </select>
+
+    <update id="update" parameterType="com.miniprogram.entity.ProjectIntroduce">
+        update smallpunch.project_introduce
+        <set>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="order != null">
+                `order` = #{order},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
 </mapper>

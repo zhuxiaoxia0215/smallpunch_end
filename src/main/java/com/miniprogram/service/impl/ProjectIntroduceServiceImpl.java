@@ -1,5 +1,6 @@
 package com.miniprogram.service.impl;
 
+import com.miniprogram.entity.ProjectIntroduce;
 import com.miniprogram.mapper.ProjectIntroduceMapper;
 import com.miniprogram.service.ProjectIntroduceService;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,10 @@ public class ProjectIntroduceServiceImpl implements ProjectIntroduceService {
     @Override
     public List<Map> getProjectIntr(Integer projectId){
         return projectIntroduceMapper.getProjectIntr(projectId);
+    }
+
+    @Override
+    public int update(ProjectIntroduce projectIntroduce) {
+        return projectIntroduceMapper.update(projectIntroduce);
     }
 }
