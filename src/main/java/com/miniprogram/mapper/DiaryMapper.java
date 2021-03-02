@@ -28,4 +28,6 @@ public interface DiaryMapper {
     List<Map> selectDiaryByUserIdAll(Integer userId);
 
     List<Map> selectDiaryByUserIdVisible(Integer userId);
+
+    int deleteDiaryById(Integer diaryId);
 }

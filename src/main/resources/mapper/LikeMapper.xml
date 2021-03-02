@@ -62,4 +62,9 @@
         where id =#{likeRecordId}
     </delete>
 
+    <delete id="deleteLikeRecoreByDiaryId">
+        delete from like_info
+        where diary_id = #{diaryId}
+    </delete>
+
 </mapper>

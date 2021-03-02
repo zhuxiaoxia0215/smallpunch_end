@@ -28,4 +28,7 @@ public interface ProjectService {
 
     int updateWeiXinNum(Integer projectId,String weixinNum);
 
+    int updateName(Integer projectId, String projectName);
+
+    Map getCreatorInfo(Integer projectId);
 }

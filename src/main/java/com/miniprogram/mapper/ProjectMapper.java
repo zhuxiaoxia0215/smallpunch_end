@@ -27,4 +27,8 @@ public interface ProjectMapper {
     int updateCreatorIntr(Integer projectId, String introduce);
 
     int updateWeixinNum(Integer projectId,String WeiXinNum);
+
+    int updateName(Integer projectId, String projectName);
+
+    Map getCreatInfo(Integer projectId);
 }

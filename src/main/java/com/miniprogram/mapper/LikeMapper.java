@@ -24,4 +24,6 @@ public interface LikeMapper {
     int addLikeRecord (Like like);
 
     int deleteLikeRecore(Integer likeRecordId);
+
+    int deleteLikeRecoreByDiaryId(Integer diaryId);
 }

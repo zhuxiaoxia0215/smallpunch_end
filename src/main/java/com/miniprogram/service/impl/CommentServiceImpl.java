@@ -77,5 +77,10 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.deleteCommentById(commentId);
     }
 
+    @Override
+    public int deleteCommentByDiaryId(Integer diaryId) {
+        return commentMapper.deleteCommentByDiaryId(diaryId);
+    }
+
 
 }

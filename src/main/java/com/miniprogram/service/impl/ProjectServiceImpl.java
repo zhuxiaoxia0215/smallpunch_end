@@ -77,4 +77,14 @@ public class ProjectServiceImpl implements ProjectService {
         return projectMapper.updateWeixinNum(projectId,weixinNum);
     }
 
+    @Override
+    public int updateName(Integer projectId, String projectName) {
+        return projectMapper.updateName(projectId,projectName);
+    }
+
+    @Override
+    public Map getCreatorInfo(Integer projectId) {
+        return projectMapper.getCreatInfo(projectId);
+    }
+
 }

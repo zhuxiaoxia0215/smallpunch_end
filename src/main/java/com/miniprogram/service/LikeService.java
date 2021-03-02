@@ -22,4 +22,6 @@ public interface LikeService {
     int addLikeRecord (Like like);
 
     int deleteLikeRecord(Integer likeRecordId);
+
+    int deleteLikeRecordByDiaryId(Integer diaryId);
 }

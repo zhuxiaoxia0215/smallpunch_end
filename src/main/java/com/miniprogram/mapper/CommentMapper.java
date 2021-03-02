@@ -22,4 +22,6 @@ public interface CommentMapper {
     Map selectCommentById (Integer commentId);
 
     int deleteCommentById(Integer commentId);
+
+    int deleteCommentByDiaryId(Integer diaryId);
 }

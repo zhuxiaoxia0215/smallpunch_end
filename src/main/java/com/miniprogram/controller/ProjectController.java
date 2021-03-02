@@ -127,32 +127,21 @@ public class ProjectController {
         return rtnMap;
     }
 
-    /**
-    *@Description: todo中
-    *@Param: 
-    *@return: 
-    *@Author: zhuxiaoxia
-    */
     @PostMapping("/getCreatorInfo")
     public Map getCreatorInfo(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
         try{
+            Integer projectId = (Integer) json.get("project_id");
 
-            Map data = new HashMap();
+            Map data = projectService.getCreatorInfo(projectId);
             rtnMap.put("data",data);
-            rtnMap.put("sucMsg","");
+            rtnMap.put("sucMsg","获取圈主简介成功");
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
         }
         return rtnMap;
     }
 
-    /**
-    *@Description:
-    *@Param: 
-    *@return: 
-    *@Author: zhuxiaoxia
-    */
     @PostMapping("/getProjectIntr")
     public Map getProjectIntr(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
@@ -214,13 +203,6 @@ public class ProjectController {
         return rtnMap;
     }
 
-    /**
-    *@Description:
-    *@Param: 
-    *@return: 
-    *@Author: zhuxiaoxia
-    */
-
     @PostMapping("/updateProjectIntr")
     public Map updateProjectIntr(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
@@ -258,6 +240,20 @@ public class ProjectController {
             rtnMap.put("data",data);
             rtnMap.put("sucMsg","");
         }catch (Exception e){
+            rtnMap.put("errMsg",e.getMessage());
+        }
+        return rtnMap;
+    }
+
+    @GetMapping("/updateName")
+    public Map updateName(HttpServletRequest request, @RequestParam("project_id") Integer projectId,
+                          @RequestParam("project_name") String projectName){
+        Map rtnMap =new HashMap();
+        try{
+            projectService.updateName(projectId,projectName);
+            rtnMap.put("data","");
+            rtnMap.put("sucMsg","修改成功");
+        }catch(Exception e){
             rtnMap.put("errMsg",e.getMessage());
         }
         return rtnMap;

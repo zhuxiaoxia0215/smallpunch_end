@@ -183,16 +183,19 @@ public class DiaryController {
 
     @PostMapping("/deleteDiaryById")
     public Map deleteDiaryById (@RequestBody Map<String,Object> json,HttpServletRequest request){
-        /**
-        *@Description: todo中
-        *@Param: [json, request]
-        *@return: java.util.Map
-        *@Author: zhuxiaoxia
-        */
+
         Map rtnMap = new HashMap();
         try {
+            Integer diaryId = (Integer) json.get("diaryId");
+            Integer projectId = (Integer) json.get("projectId");
+            Integer userId = (Integer) json.get("userId");
 
+            int diaryNum = diaryService.deleteDiary(diaryId);
+            int commentNum = commentService.deleteCommentByDiaryId(diaryId);
+            int likeNum = likeService.deleteLikeRecordByDiaryId(diaryId);
 
+            rtnMap.put("data",String.format("成功删除%s条日记，%s条评论，%s条点赞",diaryNum,commentNum,likeNum));
+            rtnMap.put("sucMsg","操作成功!");
         }catch (Exception e){
 
         }

@@ -80,4 +80,15 @@
         where user_info.id=project.creator_id and project.id = #{param1}
     </update>
 
+    <update id="updateName">
+        update project
+        set project_name=#{param2} where id=#{param1}
+    </update>
+
+    <select id="getCreatInfo" resultType="java.util.HashMap">
+        select creator_introduce,weixin_num
+        from user_info,project
+        where project.id= #{projectId} and project.creator_id =user_info.id
+    </select>
+
 </mapper>

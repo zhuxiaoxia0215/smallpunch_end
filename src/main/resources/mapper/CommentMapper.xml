@@ -88,4 +88,9 @@
         from comment
         where id=#{commentId}
     </select>
+
+    <delete id="deleteCommentByDiaryId" >
+        delete from comment
+        where diary_id = #{diaryId}
+    </delete>
 </mapper>

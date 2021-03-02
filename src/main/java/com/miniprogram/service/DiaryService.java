@@ -26,4 +26,6 @@ public interface DiaryService {
     List<Map> selectDiaryByUserIdAll(Integer visitedUserId);
 
     List<Map> selectDiaryByUserIdVisible(Integer visitedUserId);
+
+    int deleteDiary(Integer diaryId);
 }

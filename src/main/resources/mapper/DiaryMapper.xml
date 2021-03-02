@@ -131,4 +131,9 @@
         from diary
         where diary.publisher_id = #{userId} and visible_type = 1
     </select>
+
+    <delete id="deleteDiaryById" >
+        delete from diary
+        where id = #{diaryId}
+    </delete>
 </mapper>

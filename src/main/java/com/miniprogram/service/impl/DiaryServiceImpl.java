@@ -57,5 +57,10 @@ public class DiaryServiceImpl implements DiaryService {
         return diaryMapper.selectDiaryByUserIdVisible(userId);
     }
 
+    @Override
+    public int deleteDiary(Integer diaryId) {
+        return diaryMapper.deleteDiaryById(diaryId);
+    }
+
 
 }
