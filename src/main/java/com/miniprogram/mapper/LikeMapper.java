@@ -26,4 +26,6 @@ public interface LikeMapper {
     int deleteLikeRecore(Integer likeRecordId);
 
     int deleteLikeRecoreByDiaryId(Integer diaryId);
+
+    Map getUnReadNum(Integer userId);
 }

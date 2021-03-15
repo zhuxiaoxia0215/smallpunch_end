@@ -93,4 +93,10 @@
         delete from comment
         where diary_id = #{diaryId}
     </delete>
+
+    <select id="getUnReadNum" resultType="java.util.HashMap">
+        select count(*) as unreadCommentNewsNum
+        from comment
+        where is_read =0 and respondent_id = #{userId}
+    </select>
 </mapper>

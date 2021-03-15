@@ -22,4 +22,6 @@ public interface CommentService {
     int deleteCommentById (Integer commentId);
 
     int deleteCommentByDiaryId(Integer diaryId);
+
+    Map getUnReadNum(Integer userId);
 }

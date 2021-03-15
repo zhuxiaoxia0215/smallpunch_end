@@ -82,5 +82,10 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.deleteCommentByDiaryId(diaryId);
     }
 
+    @Override
+    public Map getUnReadNum(Integer userId) {
+        return commentMapper.getUnReadNum(userId);
+    }
+
 
 }

@@ -82,4 +82,9 @@ public class LikeServiceImpl implements LikeService {
     public int deleteLikeRecordByDiaryId(Integer diaryId) {
         return likeMapper.deleteLikeRecoreByDiaryId(diaryId);
     }
+
+    @Override
+    public Map getUnReadNum(Integer userId) {
+        return likeMapper.getUnReadNum(userId);
+    }
 }

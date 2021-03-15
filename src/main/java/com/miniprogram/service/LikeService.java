@@ -24,4 +24,6 @@ public interface LikeService {
     int deleteLikeRecord(Integer likeRecordId);
 
     int deleteLikeRecordByDiaryId(Integer diaryId);
+
+    Map getUnReadNum(Integer userId);
 }
