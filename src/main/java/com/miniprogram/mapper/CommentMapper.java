@@ -26,4 +26,8 @@ public interface CommentMapper {
     int deleteCommentByDiaryId(Integer diaryId);
 
     Map getUnReadNum(Integer userId);
+
+    List<Map> getUnReadByRespondent(Integer userId);
+
+    int setReasdStatus(Integer recordId);
 }

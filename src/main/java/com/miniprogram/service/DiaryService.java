@@ -28,4 +28,6 @@ public interface DiaryService {
     List<Map> selectDiaryByUserIdVisible(Integer visitedUserId);
 
     int deleteDiary(Integer diaryId);
+
+    List<String> selectPunchCardDay(Integer userId, Integer proectId);
 }

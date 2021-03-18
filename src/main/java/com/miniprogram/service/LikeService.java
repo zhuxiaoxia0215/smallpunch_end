@@ -26,4 +26,8 @@ public interface LikeService {
     int deleteLikeRecordByDiaryId(Integer diaryId);
 
     Map getUnReadNum(Integer userId);
+
+    List<Map> selectByLikeUserId(Integer userId);
+
+    void setNewsReadStatus(Integer recordId);
 }

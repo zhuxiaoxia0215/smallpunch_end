@@ -231,8 +231,8 @@ public class ProjectController {
     *@return: 
     *@Author: zhuxiaoxia
     */
-    @PostMapping("/search")
-    public Map search(HttpServletRequest request,@RequestBody Map<String, Object> json){
+    @PostMapping("/getProjectListByType")
+    public Map getProjectListByType(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
         try{
 
@@ -254,6 +254,46 @@ public class ProjectController {
             rtnMap.put("data","");
             rtnMap.put("sucMsg","修改成功");
         }catch(Exception e){
+            rtnMap.put("errMsg",e.getMessage());
+        }
+        return rtnMap;
+    }
+
+    /**
+     *@Description: todo中
+     *@Param:
+     *@return:
+     *@Author: zhuxiaoxia
+     */
+    @PostMapping("/search")
+    public Map search(HttpServletRequest request,@RequestBody Map<String, Object> json){
+        Map rtnMap = new HashMap();
+        try{
+
+            Map data = new HashMap();
+            rtnMap.put("data",data);
+            rtnMap.put("sucMsg","");
+        }catch (Exception e){
+            rtnMap.put("errMsg",e.getMessage());
+        }
+        return rtnMap;
+    }
+
+    /**
+     *@Description: todo中
+     *@Param:
+     *@return:
+     *@Author: zhuxiaoxia
+     */
+    @PostMapping("/addProjectIntr")
+    public Map addProjectIntr(HttpServletRequest request,@RequestBody Map<String, Object> json){
+        Map rtnMap = new HashMap();
+        try{
+
+            Map data = new HashMap();
+            rtnMap.put("data",data);
+            rtnMap.put("sucMsg","");
+        }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
         }
         return rtnMap;

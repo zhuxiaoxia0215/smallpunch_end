@@ -53,41 +53,14 @@ public class Diary implements Serializable {
      * 是否为补卡 0.否 1.是
      */
     private Integer isRepairDiary;
-
-    public Integer getHaveSticky() {
-        return haveSticky;
-    }
-
-    public void setHaveSticky(Integer haveSticky) {
-        this.haveSticky = haveSticky;
-    }
-
     /**
      * 是否置顶 0.否 1.是
      */
     private Integer haveSticky;
 
-    public void setAddressLatitude(Double addressLatitude) {
-        this.addressLatitude = addressLatitude;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
-
-    public void setAddressLongitude(Double addressLongitude) {
-        this.addressLongitude = addressLongitude;
-    }
-
-    public Integer getIsSticky() {
-        return isSticky;
-    }
-
-    public void setIsSticky(Integer isSticky) {
-        this.isSticky = isSticky;
-    }
-
-    /**
-     * 是否置顶 0.否 1.是
-     */
-    private Integer isSticky;
-
 
     public Integer getId() {
         return id;
@@ -113,19 +86,19 @@ public class Diary implements Serializable {
         this.publisherId = publisherId;
     }
 
-    public double getAddressLatitude() {
+    public Double getAddressLatitude() {
         return addressLatitude;
     }
 
-    public void setAddressLatitude(double addressLatitude) {
+    public void setAddressLatitude(Double addressLatitude) {
         this.addressLatitude = addressLatitude;
     }
 
-    public double getAddressLongitude() {
+    public Double getAddressLongitude() {
         return addressLongitude;
     }
 
-    public void setAddressLongitude(double addressLongitude) {
+    public void setAddressLongitude(Double addressLongitude) {
         this.addressLongitude = addressLongitude;
     }
 
@@ -177,4 +150,11 @@ public class Diary implements Serializable {
         this.isRepairDiary = isRepairDiary;
     }
 
+    public Integer getHaveSticky() {
+        return haveSticky;
+    }
+
+    public void setHaveSticky(Integer haveSticky) {
+        this.haveSticky = haveSticky;
+    }
 }

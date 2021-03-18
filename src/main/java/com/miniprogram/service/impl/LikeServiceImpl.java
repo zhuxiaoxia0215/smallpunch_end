@@ -87,4 +87,14 @@ public class LikeServiceImpl implements LikeService {
     public Map getUnReadNum(Integer userId) {
         return likeMapper.getUnReadNum(userId);
     }
+
+    @Override
+    public List<Map> selectByLikeUserId(Integer userId) {
+        return likeMapper.selectUnReadById(userId);
+    }
+
+    @Override
+    public void setNewsReadStatus(Integer recordId) {
+        likeMapper.setReadStatus(recordId);
+    }
 }

@@ -87,5 +87,15 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.getUnReadNum(userId);
     }
 
+    @Override
+    public List<Map> selectByRespondentId(Integer userId) {
+        return commentMapper.getUnReadByRespondent(userId);
+    }
+
+    @Override
+    public void setNewsReadStatus(Integer recordId) {
+        commentMapper.setReasdStatus(recordId);
+    }
+
 
 }

@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
-@RequestMapping("/index/punchCardDiary")
+@RequestMapping("/index")
 public class DiaryController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class DiaryController {
     @Autowired
     private AttendUserService attendUserService;
 
-    @PostMapping("/getDiaryDetailInfoById")
+    @PostMapping("/PunchCardDiary/getDiaryDetailInfoById")
     public Map getDiaryDetailInfoById (@RequestBody Map<String,Object> json, HttpServletRequest request){
         Map outerMap = new HashMap<String,Object>();
         try{
@@ -65,7 +65,7 @@ public class DiaryController {
         }
     }
 
-    @PostMapping("/getDiaryListByRecommend")
+    @PostMapping("/punchCardDiary/getDiaryListByRecommend")
     public Map getDiaryListByRecommend (@RequestBody Map<String,Object> json,HttpServletRequest request){
         Map<String,Object> outerMap =new HashMap<>();
         try{
@@ -113,7 +113,7 @@ public class DiaryController {
         return outerMap;
     }
 
-    @PostMapping("/getDiaryListByProjectId")
+    @PostMapping("/punchCardDiary/getDiaryListByProjectId")
     public Map getDiaryListByProjectId(@RequestBody Map<String,Object> json,HttpServletRequest request){
 
         Map<String,Object> rtnMap = new HashMap<>();
@@ -142,7 +142,17 @@ public class DiaryController {
                 diary.putAll(likeService.selectLikeRecore(userId,diaryId));
                 data.add(diary);
             }
-            rtnMap.put("data",data);
+            List<Map> pageInfo = new ArrayList<>();
+            int start = (PageNo-1)*dataNum;
+            for( int i= start; i<start+dataNum;i++){
+                if(i<data.size()){
+                    pageInfo.add(data.get(i));
+                }else{
+                    break;
+                }
+
+            }
+            rtnMap.put("data",pageInfo);
             rtnMap.put("sucMsg","获取日记详情成功");
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
@@ -150,7 +160,7 @@ public class DiaryController {
         return rtnMap;
     }
 
-    @PostMapping("/addPunchCardDiary")
+    @PostMapping("/PunchCardDiary/addPunchCardDiary")
     public Map addPunchCardDiary(@RequestBody Map<String,Object> json,HttpServletRequest request){
         Map rtnMap = new HashMap();
         try{
@@ -170,7 +180,7 @@ public class DiaryController {
             diary.setVisibleType((Integer) json.get("visible_type"));
             diary.setPunchCardTime(new Date());
 
-            diaryService.addPunchCardDiary(diary);
+            int i = diaryService.addPunchCardDiary(diary);
             Map data = new HashMap();
             data.put("diaryId",diary.getId());
             rtnMap.put("data",data);
@@ -181,7 +191,7 @@ public class DiaryController {
         return  rtnMap;
     }
 
-    @PostMapping("/deleteDiaryById")
+    @PostMapping("/PunchCardDiary/deleteDiaryById")
     public Map deleteDiaryById (@RequestBody Map<String,Object> json,HttpServletRequest request){
 
         Map rtnMap = new HashMap();
@@ -202,7 +212,7 @@ public class DiaryController {
         return rtnMap;
     }
 
-    @PostMapping("/dealDiarySticky")
+    @PostMapping("/PunchCardDiary/dealDiarySticky")
     public Map dealDiarySticky(@RequestBody Map<String,Object> json,HttpServletRequest request){
         Map rtnMap = new HashMap();
         try{
@@ -216,6 +226,82 @@ public class DiaryController {
             }
         }catch(Exception e){
             rtnMap.put("errMsg","置顶失败");
+        }
+        return rtnMap;
+    }
+
+    @PostMapping("/PunchCardDiary/punchCardDay")
+    public Map punchCardDay(@RequestBody Map<String,Object> json,HttpServletRequest request){
+        Map rtnMap = new HashMap();
+        try{
+            Integer projectId = (Integer) json.get("projectId");
+            Integer userId = (Integer) json.get("userId");
+
+             List<String> data = diaryService.selectPunchCardDay(userId,projectId);
+             rtnMap.put("data",data);
+             rtnMap.put("sucMsg","获取成功");
+        }catch (Exception e){
+            rtnMap.put("errMsg","获取失败");
+        }
+        return rtnMap;
+    }
+
+    /**
+     *@Description: todo中
+     *@Param:
+     *@return:
+     *@Author: zhuxiaoxia
+     */
+    @PostMapping("/PunchCardDiary/getCreatorInfo")
+    public Map getCreatorInfo (HttpServletRequest request,@RequestBody Map<String, Object> json){
+        Map rtnMap = new HashMap();
+        try{
+
+            Map data = new HashMap();
+            rtnMap.put("data",data);
+            rtnMap.put("sucMsg","");
+        }catch (Exception e){
+            rtnMap.put("errMsg",e.getMessage());
+        }
+        return rtnMap;
+    }
+
+    /**
+     *@Description: todo中
+     *@Param:
+     *@return:
+     *@Author: zhuxiaoxia
+     */
+    @PostMapping("/PunchCardDiary/getProjectIntr")
+    public Map getProjectIntr (HttpServletRequest request,@RequestBody Map<String, Object> json){
+        Map rtnMap = new HashMap();
+        try{
+
+            Map data = new HashMap();
+            rtnMap.put("data",data);
+            rtnMap.put("sucMsg","");
+        }catch (Exception e){
+            rtnMap.put("errMsg",e.getMessage());
+        }
+        return rtnMap;
+    }
+
+    /**
+     *@Description: todo中
+     *@Param:
+     *@return:
+     *@Author: zhuxiaoxia
+     */
+    @PostMapping("/PunchCardDiary/updateName")
+    public Map updateName (HttpServletRequest request,@RequestBody Map<String, Object> json){
+        Map rtnMap = new HashMap();
+        try{
+
+            Map data = new HashMap();
+            rtnMap.put("data",data);
+            rtnMap.put("sucMsg","");
+        }catch (Exception e){
+            rtnMap.put("errMsg",e.getMessage());
         }
         return rtnMap;
     }

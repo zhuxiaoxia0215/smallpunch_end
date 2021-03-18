@@ -99,4 +99,16 @@
         from comment
         where is_read =0 and respondent_id = #{userId}
     </select>
+
+    <select id="getUnReadByRespondent" resultType="java.util.HashMap">
+        select id,diary_id,respondent_id,text_comment,create_time,create_time,reviewer
+        from comment
+        where respondent_id =#{userId} and is_read = 0
+    </select>
+
+    <update id="setReasdStatus" >
+        update comment
+        set is_read = 1
+        where id = #{recordId}
+    </update>
 </mapper>

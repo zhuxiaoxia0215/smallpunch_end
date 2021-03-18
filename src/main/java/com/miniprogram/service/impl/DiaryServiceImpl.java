@@ -62,5 +62,10 @@ public class DiaryServiceImpl implements DiaryService {
         return diaryMapper.deleteDiaryById(diaryId);
     }
 
+    @Override
+    public List<String> selectPunchCardDay(Integer userId, Integer projectId) {
+        return diaryMapper.selectPunchCardDay(userId,projectId);
+    }
+
 
 }

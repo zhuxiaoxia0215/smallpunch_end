@@ -2,6 +2,7 @@ package com.miniprogram.controller;
 
 import com.miniprogram.entity.Comment;
 import com.miniprogram.service.CommentService;
+import com.miniprogram.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/index/DiaryComment")
@@ -19,6 +18,8 @@ public class CommentController {
 
     @Autowired
     CommentService commentService;
+    @Autowired
+    UserInfoService userInfoService;
 
     @PostMapping("/addComment")
     public Map addComment(@RequestBody Map<String,Object> json, HttpServletRequest request){
@@ -58,6 +59,33 @@ public class CommentController {
 
         }catch(Exception e){
             rtnMap.put("errMsg",rtnMap);
+        }
+        return rtnMap;
+    }
+
+    @PostMapping("/getMyCommentedList")
+    public Map getMyCommentedList(HttpServletRequest request,@RequestBody Map<String, Object> json){
+        Map rtnMap = new HashMap();
+        try{
+            Integer userId = (Integer) json.get("user_id");
+
+            List<Map> result = commentService.selectByRespondentId(userId);
+            List<Map> data = new LinkedList<>();
+            if(null !=result && ! result.isEmpty() ){
+                for(Map comment : result){
+                    Integer reviewerId = (Integer) comment.get("reviewer");
+                    Map reviewer = userInfoService.selectUserById(reviewerId);
+                    comment.remove(reviewer);
+                    comment.put("reviewer",reviewer);
+                    data.add(comment);
+                }
+
+            }
+
+            rtnMap.put("data",data);
+            rtnMap.put("sucMsg","获取成功");
+        }catch (Exception e){
+            rtnMap.put("errMsg",e.getMessage());
         }
         return rtnMap;
     }

@@ -30,4 +30,6 @@ public interface DiaryMapper {
     List<Map> selectDiaryByUserIdVisible(Integer userId);
 
     int deleteDiaryById(Integer diaryId);
+
+    List<String> selectPunchCardDay(Integer userId, Integer projectId);
 }

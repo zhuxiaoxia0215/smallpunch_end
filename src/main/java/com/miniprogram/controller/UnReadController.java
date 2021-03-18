@@ -52,10 +52,19 @@ public class UnReadController {
     public Map setNewsReadStatus (HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
         try{
+            String unreadNewsType = (String) json.get("unread_news_type");
+            Integer recordId = (Integer) json.get("record_id");
 
+            if(unreadNewsType!= null && !unreadNewsType.isEmpty()){
+                if("commentNews".equals(unreadNewsType)){
+                    commentService.setNewsReadStatus(recordId);
+                }else {
+                    likeService.setNewsReadStatus(recordId);
+                }
+            }
             Map data = new HashMap();
             rtnMap.put("data",data);
-            rtnMap.put("sucMsg","");
+            rtnMap.put("sucMsg","已读成功");
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
         }

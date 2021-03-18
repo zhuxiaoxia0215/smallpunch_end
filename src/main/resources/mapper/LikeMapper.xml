@@ -72,4 +72,16 @@
         from like_info
         where is_read =0 and liked_user_id = #{userId}
     </select>
+
+    <select id="selectUnReadById" resultType="java.util.HashMap">
+        select id, diary_id,liked_user_id,create_time,admirer_id
+        from like_info
+        where liked_user_id = #{userId} and is_read =0
+    </select>
+
+    <update id="setReadStatus">
+       update like_info
+       set is_read = 1
+       where id = #{recordId} and is_read =0
+    </update>
 </mapper>

@@ -24,4 +24,8 @@ public interface CommentService {
     int deleteCommentByDiaryId(Integer diaryId);
 
     Map getUnReadNum(Integer userId);
+
+    List<Map> selectByRespondentId(Integer userId);
+
+    void setNewsReadStatus(Integer recordId);
 }

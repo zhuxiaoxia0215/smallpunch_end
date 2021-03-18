@@ -77,7 +77,7 @@
             <if test="isRepairDiary != null">
                 is_repair_diary,
             </if>
-            <if test="haveSticky ！=null">
+            <if test="haveSticky!=null">
                 have_sticky,
             </if>
         </trim>
@@ -136,4 +136,11 @@
         delete from diary
         where id = #{diaryId}
     </delete>
+
+    <select id="selectPunchCardDay" resultType="java.lang.String">
+        select DATE_FORMAT(punch_card_time,'%Y-%m-%d') punch_card_day
+        from diary
+        where publisher_id = #{param1} and project_id =#{param2}
+        group by punch_card_day
+    </select>
 </mapper>

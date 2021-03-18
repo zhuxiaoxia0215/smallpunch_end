@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/index")
@@ -169,8 +166,17 @@ public class UserController {
                 diary.putAll(likeService.selectLikeRecore(visitorUserId,diaryId));
                 data.add(diary);
             }
+            List<Map> pageInfo = new ArrayList<>();
+            int start = (pageNo-1)*dataNum;
+            for( int i= start; i<start+dataNum;i++){
+                if(i<data.size()){
+                    pageInfo.add(data.get(i));
+                }else{
+                    break;
+                }
 
-            rtnMap.put("data",data);
+            }
+            rtnMap.put("data",pageInfo);
             rtnMap.put("sucMsg","");
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
