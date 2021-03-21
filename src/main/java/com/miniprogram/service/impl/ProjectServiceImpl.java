@@ -1,18 +1,16 @@
 package com.miniprogram.service.impl;
 
 import com.miniprogram.entity.Project;
-import com.miniprogram.entity.ProjectIntroduce;
 import com.miniprogram.mapper.AttendUserMapper;
 import com.miniprogram.mapper.DiaryMapper;
-import com.miniprogram.mapper.ProjectLabelMapper;
 import com.miniprogram.mapper.ProjectMapper;
 import com.miniprogram.service.ProjectLabelService;
 import com.miniprogram.service.ProjectService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -85,6 +83,22 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Map getCreatorInfo(Integer projectId) {
         return projectMapper.getCreatInfo(projectId);
+    }
+
+    @Override
+    public List<Map> selectByType(String typeName) {
+        List<Map> projectList = projectMapper.selectByType(typeName);
+        List<Map> result = new LinkedList<>();
+        for (Map project : projectList){
+            Integer projectId = (Integer) project.get("id");
+            Map punchCardNum = diaryMapper.projectNum(projectId);
+            Map attendNum = attendUserMapper.attendNum(projectId);
+
+            project.putAll(punchCardNum);
+            project.putAll(attendNum);
+            result.add(project);
+        }
+        return result;
     }
 
 }

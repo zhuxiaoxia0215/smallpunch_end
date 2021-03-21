@@ -32,4 +32,6 @@ public interface DiaryMapper {
     int deleteDiaryById(Integer diaryId);
 
     List<String> selectPunchCardDay(Integer userId, Integer projectId);
+
+    Map projectNum(Integer projectId);
 }

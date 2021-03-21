@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.DatabaseMetaData;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * (Project)表控制层
@@ -235,10 +232,23 @@ public class ProjectController {
     public Map getProjectListByType(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
         try{
+            Integer pageNo = (Integer) json.get("pageNo");
+            Integer pageNum = (Integer) json.get("pageSize");
+            String typeName = (String) json.get("typeName");
 
-            Map data = new HashMap();
-            rtnMap.put("data",data);
-            rtnMap.put("sucMsg","");
+            List<Map> projectList = projectService.selectByType(typeName);
+
+            List<Map> pageInfo = new ArrayList<>();
+            int start = (pageNo-1)*pageNum;
+            for( int i= start; i<start+pageNum;i++){
+                if(i<projectList.size()){
+                    pageInfo.add(projectList.get(i));
+                }else{
+                    break;
+                }
+            }
+            rtnMap.put("data",pageInfo);
+            rtnMap.put("sucMsg","获取成功");
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
         }
@@ -290,9 +300,22 @@ public class ProjectController {
         Map rtnMap = new HashMap();
         try{
 
+            String content = (String) json.get("content");
+            int order = (int) json.get("order");
+            Integer projectId =(Integer) json.get("project_id");
+            int type =(int) json.get("type");
+
+            ProjectIntroduce projectIntroduce = new ProjectIntroduce();
+            projectIntroduce.setContent(content);
+            projectIntroduce.setOrder(order);
+            projectIntroduce.setProjectId(projectId);
+            projectIntroduce.setType(type);
+
+            projectIntroduceService.insert(projectIntroduce);
+
             Map data = new HashMap();
             rtnMap.put("data",data);
-            rtnMap.put("sucMsg","");
+            rtnMap.put("sucMsg","修改成功");
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
         }

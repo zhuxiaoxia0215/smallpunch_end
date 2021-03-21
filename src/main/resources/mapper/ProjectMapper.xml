@@ -91,4 +91,9 @@
         where project.id= #{projectId} and project.creator_id =user_info.id
     </select>
 
+    <select id="selectByType" resultType="java.util.HashMap">
+        select project.id,project_name,cover_img_url
+        from project,project_label
+        where project.id = project_label.project_id and type_label like concat('%', #{typeName},'%')
+    </select>
 </mapper>

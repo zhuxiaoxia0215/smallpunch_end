@@ -24,4 +24,6 @@ public interface AttendUserMapper {
     List<Map> getAttendUser (Integer projectId);
 
     int joinInProject(AttendUser attendUser);
+
+    Map attendNum(Integer projectId);
 }

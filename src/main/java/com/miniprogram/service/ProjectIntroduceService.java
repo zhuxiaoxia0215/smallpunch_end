@@ -16,4 +16,6 @@ public interface ProjectIntroduceService {
     List<Map> getProjectIntr (Integer projectId);
 
     int update(ProjectIntroduce projectIntroduce);
+
+    void insert(ProjectIntroduce projectIntroduce);
 }

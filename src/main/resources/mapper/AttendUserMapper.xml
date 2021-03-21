@@ -59,4 +59,10 @@
             </if>
         </trim>
     </insert>
+
+    <select id="attendNum" resultType="java.util.HashMap">
+        select count(*) attend_user_num
+        from attend_user
+        where project_id = #{projectId}
+    </select>
 </mapper>

@@ -13,6 +13,10 @@ public class ProjectIntroduce implements Serializable {
 
     private Integer id;
     /**
+     * 圈子id
+     */
+    private Integer projectId;
+    /**
      * 内容
      */
     private String content;
@@ -58,4 +62,11 @@ public class ProjectIntroduce implements Serializable {
         this.order = order;
     }
 
+    public Integer getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
+    }
 }

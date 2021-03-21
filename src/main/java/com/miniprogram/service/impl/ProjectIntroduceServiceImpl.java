@@ -29,4 +29,9 @@ public class ProjectIntroduceServiceImpl implements ProjectIntroduceService {
     public int update(ProjectIntroduce projectIntroduce) {
         return projectIntroduceMapper.update(projectIntroduce);
     }
+
+    @Override
+    public void insert(ProjectIntroduce projectIntroduce) {
+        projectIntroduceMapper.insert(projectIntroduce);
+    }
 }

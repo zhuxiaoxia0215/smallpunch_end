@@ -31,4 +31,6 @@ public interface ProjectMapper {
     int updateName(Integer projectId, String projectName);
 
     Map getCreatInfo(Integer projectId);
+
+    List<Map> selectByType(String typeName);
 }

@@ -18,4 +18,6 @@ public interface ProjectIntroduceMapper {
     List<Map> getProjectIntr (Integer projectId);
 
     int update(ProjectIntroduce projectIntroduce);
+
+    void insert(ProjectIntroduce projectIntroduce);
 }

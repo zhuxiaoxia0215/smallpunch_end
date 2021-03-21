@@ -14,7 +14,7 @@
         <result property="textContent" column="text_content" jdbcType="VARCHAR"/>
         <result property="visibleType" column="visible_type" jdbcType="INTEGER"/>
         <result property="isRepairDiary" column="is_repair_diary" jdbcType="INTEGER"/>
-        <result property="isSticky" column="is_sticky" javaType="INTEGER"/>
+        <result property="haveSticky" column="have_sticky" javaType="INTEGER"/>
     </resultMap>
 
     <update id="setSticky">
@@ -142,5 +142,11 @@
         from diary
         where publisher_id = #{param1} and project_id =#{param2}
         group by punch_card_day
+    </select>
+
+    <select id="projectNum" resultType="java.util.HashMap">
+        select count(*) as all_punch_card_num
+        from diary
+        where project_id=#{projectId}
     </select>
 </mapper>

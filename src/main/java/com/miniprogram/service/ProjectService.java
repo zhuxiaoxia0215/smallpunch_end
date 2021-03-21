@@ -31,4 +31,6 @@ public interface ProjectService {
     int updateName(Integer projectId, String projectName);
 
     Map getCreatorInfo(Integer projectId);
+
+    List<Map> selectByType(String typeName);
 }
