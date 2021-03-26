@@ -28,7 +28,7 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     public Map getPunchCardNum(Integer projectId) {
-        return diaryMapper.selectDiaryById(projectId);
+        return diaryMapper.getPunchCardNumByProjectId(projectId);
     }
 
     @Override

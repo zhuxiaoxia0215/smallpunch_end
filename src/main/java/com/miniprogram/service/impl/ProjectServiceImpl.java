@@ -101,4 +101,10 @@ public class ProjectServiceImpl implements ProjectService {
         return result;
     }
 
+    @Override
+    public List<Map> selectByKeyWord(String keyWord) {
+        return projectMapper.selectByKeyWord(keyWord);
+    }
+
+
 }

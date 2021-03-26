@@ -33,4 +33,6 @@ public interface ProjectService {
     Map getCreatorInfo(Integer projectId);
 
     List<Map> selectByType(String typeName);
+
+    List<Map> selectByKeyWord(String keyWord);
 }

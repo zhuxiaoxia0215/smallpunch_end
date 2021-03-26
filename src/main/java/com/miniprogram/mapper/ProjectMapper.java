@@ -33,4 +33,6 @@ public interface ProjectMapper {
     Map getCreatInfo(Integer projectId);
 
     List<Map> selectByType(String typeName);
+
+    List<Map> selectByKeyWord(String keyWord);
 }

@@ -5,10 +5,7 @@ import com.miniprogram.entity.Project;
 import com.miniprogram.entity.ProjectIntroduce;
 import com.miniprogram.entity.ProjectLabel;
 import com.miniprogram.mapper.ProjectLabelMapper;
-import com.miniprogram.service.AttendUserService;
-import com.miniprogram.service.ProjectIntroduceService;
-import com.miniprogram.service.ProjectLabelService;
-import com.miniprogram.service.ProjectService;
+import com.miniprogram.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +34,8 @@ public class ProjectController {
     private AttendUserService attendUserService;
     @Resource
     private ProjectIntroduceService projectIntroduceService;
+    @Resource
+    private DiaryService diaryService;
 
     @PostMapping("/create")
     public Map createProject (HttpServletRequest request, @RequestBody Map<String, Object> json){
@@ -279,9 +278,31 @@ public class ProjectController {
     public Map search(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
         try{
+            String keyWord = (String) json.get("keyword");
+            Integer pageNo = (Integer) json.get("pageNo");
+            Integer pageSize = (Integer) json.get("pageSize");
+
+            List<Map> searchResult = projectService.selectByKeyWord(keyWord);
+            List<Map> pageInfo = new ArrayList<>();
+
+            for (Map result :searchResult){
+                Integer projectId = (Integer) result.get("id");
+                result.putAll(diaryService.getPunchCardNum(projectId));
+                result.putAll(attendUserService.getAttendUserNum(projectId));
+                pageInfo.add(result);
+            }
+
+            int start = (pageNo-1)*pageSize;
+            for( int i= start; i<start+pageSize;i++){
+                if(i<searchResult.size()){
+                    pageInfo.add(searchResult.get(i));
+                }else{
+                    break;
+                }
+            }
 
             Map data = new HashMap();
-            rtnMap.put("data",data);
+            rtnMap.put("data",pageInfo);
             rtnMap.put("sucMsg","");
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());

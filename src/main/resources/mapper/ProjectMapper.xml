@@ -96,4 +96,10 @@
         from project,project_label
         where project.id = project_label.project_id and type_label like concat('%', #{typeName},'%')
     </select>
+    
+    <select id="selectByKeyWord" resultType="java.util.HashMap">
+        select project.id,project_name,cover_img_url
+        from project
+        where project.project_name like concat('%', #{keyWord},'%')
+    </select>
 </mapper>
