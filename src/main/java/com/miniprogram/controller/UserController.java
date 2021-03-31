@@ -139,7 +139,9 @@ public class UserController {
             int dataNum = (int) json.get("dataNum");
             int pageNo =(int) json.get("pageNo");
             int isDiaryCreator = (int) json.get("isDiaryCreator");
+            //被访问者id
             Integer visitedUserId = (Integer) json.get("visitedUserId");
+            //访问者id
             Integer visitorUserId = (Integer) json.get("visitorUserId");
 
             List<Map> diaryList = new LinkedList<>();
@@ -162,8 +164,12 @@ public class UserController {
                 diary.put("like_user_num",likeList.size());
                 diary.put("comment_num",commentList.size());
                 diary.put("tenLikeInfo",tenLikeInfo);
-                diary.put("punchCardProject", projectMapper.selectProjectByDiaryId(diaryId));
+
+                Map projectMap = projectMapper.selectProjectByDiaryId(diaryId);
+                diary.put("punchCardProject", projectMap);
+                Integer projectId =(Integer) projectMap.get("id");
                 diary.putAll(likeService.selectLikeRecore(visitorUserId,diaryId));
+                diary.put("curr_diary_punch_card_day_num",diaryService.selectPunchCardDay(visitedUserId,projectId).size());
                 data.add(diary);
             }
             List<Map> pageInfo = new ArrayList<>();
@@ -185,7 +191,7 @@ public class UserController {
     }
 
     /**
-    *@Description: todo中
+    *@Description: todo
     *@Param: 
     *@return: 
     *@Author: zhuxiaoxia
@@ -198,6 +204,27 @@ public class UserController {
             Map data = new HashMap();
             rtnMap.put("data",data);
             rtnMap.put("sucMsg","");
+        }catch (Exception e){
+            rtnMap.put("errMsg",e.getMessage());
+        }
+        return rtnMap;
+    }
+
+    @PostMapping("/getUserDetailInfoById")
+    public Map getUserDetailInfoById(HttpServletRequest request,@RequestBody Map<String, Object> json){
+        Map rtnMap = new HashMap();
+        try{
+            //被访问者id
+            Integer visitedId = (Integer) json.get("visited_id");
+            //访问者id
+            Integer visitorId = (Integer) json.get("visitor_id");
+
+            Map userInfo = userInfoService.selectUserById(visitedId);
+
+
+            Map data = new HashMap();
+            rtnMap.put("data",data);
+            rtnMap.put("sucMsg","获取用户主页信息成功!");
         }catch (Exception e){
             rtnMap.put("errMsg",e.getMessage());
         }

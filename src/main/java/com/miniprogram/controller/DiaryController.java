@@ -77,6 +77,8 @@ public class DiaryController {
             List<Map> diaryIdList = new ArrayList<>();
             for (Integer projectId :projectIdList){
                 allDiary.addAll(diaryService.selectDiaryByProject(projectId));
+
+                //allDiary.add("curr_diary_punch_card_day_num");
             }
             for( int i=0; i<allDiary.size(); i++){
                 Integer diaryId = (Integer) allDiary.get(i).get("id");
@@ -139,6 +141,7 @@ public class DiaryController {
                 diary.put("like_user_num",likeList.size());
                 diary.put("comment_num",commentList.size());
                 diary.put("tenLikeInfo",tenLikeInfo);
+                diary.put("curr_diary_punch_card_day_num",diaryService.selectPunchCardDay(userId,projectId).size());
                 diary.putAll(likeService.selectLikeRecore(userId,diaryId));
                 data.add(diary);
             }

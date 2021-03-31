@@ -268,12 +268,6 @@ public class ProjectController {
         return rtnMap;
     }
 
-    /**
-     *@Description: todo
-     *@Param:
-     *@return:
-     *@Author: zhuxiaoxia
-     */
     @PostMapping("/search")
     public Map search(HttpServletRequest request,@RequestBody Map<String, Object> json){
         Map rtnMap = new HashMap();
